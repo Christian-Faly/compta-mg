@@ -1,0 +1,329 @@
+object FRecherche: TFRecherche
+  Left = 41
+  Top = 24
+  Width = 724
+  Height = 475
+  Caption = 'Recherche'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel5: TPanel
+    Left = 0
+    Top = 400
+    Width = 716
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    object SpeedButton2: TSpeedButton
+      Left = 8
+      Top = 7
+      Width = 105
+      Height = 25
+      Caption = 'Lancer crit'#232're'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33033333333333333F7F3333333333333000333333333333F777333333333333
+        000333333333333F777333333333333000333333333333F77733333333333300
+        033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+        33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+        3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+        33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+        333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+        333333773FF77333333333370007333333333333777333333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton2Click
+    end
+    object SpeedButton5: TSpeedButton
+      Left = 488
+      Top = 7
+      Width = 105
+      Height = 25
+      Caption = 'Enregistrer crit'#232're'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333330070
+        7700333333337777777733333333008088003333333377F73377333333330088
+        88003333333377FFFF7733333333000000003FFFFFFF77777777000000000000
+        000077777777777777770FFFFFFF0FFFFFF07F3333337F3333370FFFFFFF0FFF
+        FFF07F3FF3FF7FFFFFF70F00F0080CCC9CC07F773773777777770FFFFFFFF039
+        99337F3FFFF3F7F777F30F0000F0F09999937F7777373777777F0FFFFFFFF999
+        99997F3FF3FFF77777770F00F000003999337F773777773777F30FFFF0FF0339
+        99337F3FF7F3733777F30F08F0F0337999337F7737F73F7777330FFFF0039999
+        93337FFFF7737777733300000033333333337777773333333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton5Click
+    end
+    object SpeedButton6: TSpeedButton
+      Left = 131
+      Top = 7
+      Width = 105
+      Height = 25
+      Caption = 'Ajouter'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333333FF33333333FF333993333333300033377F3333333777333993333333
+        300033F77FFF3333377739999993333333333777777F3333333F399999933333
+        33003777777333333377333993333333330033377F3333333377333993333333
+        3333333773333333333F333333333333330033333333F33333773333333C3333
+        330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+        333333333337733333FF3333333C333330003333333733333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton6Click
+    end
+    object SpeedButton7: TSpeedButton
+      Left = 249
+      Top = 7
+      Width = 105
+      Height = 25
+      Caption = 'Modifier'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+        555555555555555555555555555555555555555555FF55555555555559055555
+        55555555577FF5555555555599905555555555557777F5555555555599905555
+        555555557777FF5555555559999905555555555777777F555555559999990555
+        5555557777777FF5555557990599905555555777757777F55555790555599055
+        55557775555777FF5555555555599905555555555557777F5555555555559905
+        555555555555777FF5555555555559905555555555555777FF55555555555579
+        05555555555555777FF5555555555557905555555555555777FF555555555555
+        5990555555555555577755555555555555555555555555555555}
+      NumGlyphs = 2
+      OnClick = SpeedButton7Click
+    end
+    object SpeedButton8: TSpeedButton
+      Left = 362
+      Top = 7
+      Width = 105
+      Height = 25
+      Caption = 'Supprimer'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333FF33333333333330003333333333333777333333333333
+        300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+        3300377777733333337733333333333333003333333333333377333333333333
+        3333333333333333333F333333333333330033333F33333333773333C3333333
+        330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+        333333377F33333333FF3333C333333330003333733333333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      NumGlyphs = 2
+    end
+    object BitBtn2: TBitBtn
+      Left = 601
+      Top = 7
+      Width = 105
+      Height = 25
+      Caption = '&Choisir'
+      TabOrder = 0
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333333333333333333FFF333333333333000333333333
+        3333777FFF3FFFFF33330B000300000333337F777F777773F333000E00BFBFB0
+        3333777F773333F7F333000E0BFBF0003333777F7F3337773F33000E0FBFBFBF
+        0333777F7F3333FF7FFF000E0BFBF0000003777F7F3337777773000E0FBFBFBF
+        BFB0777F7F33FFFFFFF7000E0BF000000003777F7FF777777773000000BFB033
+        33337777773FF733333333333300033333333333337773333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      NumGlyphs = 2
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 33
+    Width = 716
+    Height = 235
+    Align = alClient
+    DataSource = DataSource1
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+  end
+  object ListBox1: TListBox
+    Left = 120
+    Top = 16
+    Width = 361
+    Height = 177
+    ItemHeight = 13
+    TabOrder = 2
+    Visible = False
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 0
+    Width = 716
+    Height = 33
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNavy
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    OnChange = PageControl1Change
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 268
+    Width = 716
+    Height = 132
+    Align = alBottom
+    TabOrder = 4
+    object PageControl3: TPageControl
+      Left = 1
+      Top = 1
+      Width = 287
+      Height = 130
+      Align = alClient
+      TabOrder = 0
+    end
+    object Panel2: TPanel
+      Left = 288
+      Top = 1
+      Width = 427
+      Height = 130
+      Align = alRight
+      TabOrder = 1
+      object Label1: TLabel
+        Left = 98
+        Top = 11
+        Width = 50
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'R'#233'f'#233'rence'
+      end
+      object Label5: TLabel
+        Left = 8
+        Top = 79
+        Width = 22
+        Height = 13
+        Caption = 'Nom'
+      end
+      object Label2: TLabel
+        Left = 23
+        Top = 36
+        Width = 70
+        Height = 13
+        Caption = 'Enregistrement'
+        OnClick = Label2Click
+      end
+      object Edit1: TEdit
+        Left = 151
+        Top = 6
+        Width = 73
+        Height = 21
+        TabOrder = 0
+      end
+      object RadioGroup1: TRadioGroup
+        Left = 232
+        Top = 1
+        Width = 194
+        Height = 128
+        Align = alRight
+        Caption = 'Trie'
+        ItemIndex = 0
+        Items.Strings = (
+          'Aucun'
+          'Nom'
+          'R'#233'f'#233'rence'
+          'Date d'#39'enregitrement du dossier'
+          'Date de derni'#232're modification')
+        TabOrder = 1
+      end
+      object Edit2: TEdit
+        Left = 8
+        Top = 96
+        Width = 217
+        Height = 21
+        TabOrder = 2
+      end
+      object CheckBox1: TCheckBox
+        Left = 100
+        Top = 35
+        Width = 16
+        Height = 17
+        TabOrder = 3
+        OnClick = CheckBox1Click
+      end
+      object Panel3: TPanel
+        Left = 117
+        Top = 28
+        Width = 112
+        Height = 49
+        BevelOuter = bvNone
+        TabOrder = 4
+        Visible = False
+        object Label3: TLabel
+          Left = 20
+          Top = 28
+          Width = 9
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'et'
+        end
+        object Label4: TLabel
+          Left = 6
+          Top = 6
+          Width = 24
+          Height = 13
+          Caption = 'entre'
+        end
+        object MaskEdit1: TMaskEdit
+          Left = 35
+          Top = 2
+          Width = 73
+          Height = 21
+          EditMask = '!99/99/0000;1;_'
+          MaxLength = 10
+          TabOrder = 0
+          Text = '  /  /    '
+        end
+        object MaskEdit2: TMaskEdit
+          Left = 34
+          Top = 27
+          Width = 74
+          Height = 21
+          EditMask = '!99/99/0000;1;_'
+          MaxLength = 10
+          TabOrder = 1
+          Text = '  /  /    '
+        end
+      end
+    end
+  end
+  object DataSource1: TDataSource
+    Left = 288
+    Top = 160
+  end
+end

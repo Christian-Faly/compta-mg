@@ -1,0 +1,22 @@
+
+======== ASHM : Accounting Software Homemade ==========
+
+To use the accounting software compatible with Malagasy taxation:
+1 - download the binpg folder
+2 - install postgres version 9.4
+For each backup in the folder DB Create database with the same name
+(without .backup) and Restore. Here they are :
+s2102223, s2102324, s3112223, s3112324, s_compta, utilisateur
+3 - install psqlodbc_x86 x32
+4 - Add in odbc32 driver postgresql unicode successively the name and the database
+    a - exercise : s2102324,
+    b - exercise_1 : s2102223,
+    c - compta_pg : s_compta
+    d - multisoc : dsociete,
+    e - utilisat : utilisatur
+
+5 - execute PCompta.exe
+
+ Enjoy
+
+ Software source is available and at your disposal in Delphi7 for improvement.

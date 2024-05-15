@@ -1,0 +1,404 @@
+unit URembTVA;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, Grids, DBGrids, DB, Mask,
+  DBCtrls, ADODB;
+
+type
+  TFRembTVA = class(TForm)
+    S_RRembTVA: TDataSource;
+    S_RRembTVA_Rglt: TDataSource;
+    DataSource1: TDataSource;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    GroupBox3: TGroupBox;
+    DBGrid1: TDBGrid;
+    GroupBox2: TGroupBox;
+    DBGrid2: TDBGrid;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    GroupBox4: TGroupBox;
+    DBGrid3: TDBGrid;
+    TabSheet2: TTabSheet;
+    S_CopieRembTVA: TDataSource;
+    Label13: TLabel;
+    s_RRembTVA_Facture: TDataSource;
+    Panel4: TPanel;
+    GroupBox10: TGroupBox;
+    SpeedButton4: TSpeedButton;
+    SpeedButton8: TSpeedButton;
+    SpeedButton11: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    RadioGroup1: TRadioGroup;
+    SpeedButton9: TSpeedButton;
+    RadioGroup2: TRadioGroup;
+    Panel5: TPanel;
+    DBGrid4: TDBGrid;
+    Panel2: TPanel;
+    DBGrid6: TDBGrid;
+    GroupBox11: TGroupBox;
+    Label11: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    DBText5: TDBText;
+    Panel3: TPanel;
+    DBGrid7: TDBGrid;
+    GroupBox12: TGroupBox;
+    Label19: TLabel;
+    Label21: TLabel;
+    DBText6: TDBText;
+    DBText8: TDBText;
+    DBText9: TDBText;
+    GroupBox6: TGroupBox;
+    GroupBox7: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label10: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit9: TDBEdit;
+    DBEdit10: TDBEdit;
+    DBEdit7: TDBEdit;
+    DBEdit11: TDBEdit;
+    GroupBox8: TGroupBox;
+    Label9: TLabel;
+    Label20: TLabel;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    GroupBox9: TGroupBox;
+    Label12: TLabel;
+    Label14: TLabel;
+    DBEdit6: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBNavigator1: TDBNavigator;
+    ComboBox3: TComboBox;
+    Label22: TLabel;
+    SpeedButton10: TSpeedButton;
+    Label23: TLabel;
+    DBEdit12: TDBEdit;
+    DBEdit13: TDBEdit;
+    DBEdit14: TDBEdit;
+    Label25: TLabel;
+    Label26: TLabel;
+    GroupBox5: TGroupBox;
+    CheckBox3: TCheckBox;
+    CheckBox1: TCheckBox;
+    SpeedButton5: TSpeedButton;
+    Label24: TLabel;
+    Edit1: TEdit;
+    GroupBox1: TGroupBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    ComboBox2: TComboBox;
+    Edit4: TEdit;
+    UpDown1: TUpDown;
+    GroupBox13: TGroupBox;
+    Label5: TLabel;
+    ComboBox1: TComboBox;
+    Edit3: TEdit;
+    UpDown2: TUpDown;
+    Label6: TLabel;
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton11Click(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure SpeedButton9Click(Sender: TObject);
+    procedure DBEdit7Change(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure S_CopieRembTVADataChange(Sender: TObject; Field: TField);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton10Click(Sender: TObject);
+  private
+    { Private declarations }
+    periodeDe,periodeA:string;
+    procedure Requete;
+    Procedure RechercheCentralTVA;
+    function  OuvrirCopie:boolean;
+    procedure CreerCopie;
+  public
+    { Public declarations }
+    procedure Asehoy;
+  end;
+
+var
+  FRembTVA: TFRembTVA;
+
+implementation
+
+uses USQL, UPStocke, DaCommun, ImpLettr, UEtaRembTVA;
+
+{$R *.dfm}
+
+procedure TFRembTVA.Asehoy;
+var year,Month,Day:word;
+begin
+  DecodeDate(Commun.SocieteExerDeb.Value,Year,Month,Day);
+  Edit4.text:=inttostr(Year);
+  UpDown1.position:=Year;
+  ComboBox2.ItemIndex:=Month-1;
+  DecodeDate(Commun.SocieteExerFin.Value,Year,Month,Day);
+  Edit3.text:=inttostr(Year);
+  UpDown2.position:=Year;
+  ComboBox1.ItemIndex:=Month-1;
+  RechercheCentralTVA;
+  edit1.Text:='CopieRembTVA';
+  showModal;
+end;
+
+Procedure TFRembTVA.RechercheCentralTVA;
+//var i:integer;
+begin
+  DASQL.SelParaDecl.close;
+  DASQL.SelParaDecl.Parameters[0].Value:='CENTR_TVA';
+  DASQL.SelParaDecl.Parameters[1].Value:='CENTR_TVA';
+  DASQL.SelParaDecl.Parameters[2].Value:='CENTR_TVAZ';
+  DASQL.SelParaDecl.Open;
+  PStockee.R_Centralisateur.Close;
+  PStockee.R_Centralisateur.SQL.Clear;
+  PStockee.R_Centralisateur.SQL.Add(' SELECT Journal');
+  PStockee.R_Centralisateur.SQL.Add('FROM EltJrn');
+  PStockee.R_Centralisateur.SQL.Add('where  ');
+  while not DASQL.SelParaDecl.Eof do
+  begin
+    PStockee.R_Centralisateur.SQL.Add(' ((Compte>'''+ DASQL.SelParaDeclCompteDe.Value +
+                                          ''') And (Compte<'''+ DASQL.SelParaDeclCompteA.Value+'''))');
+    DASQL.SelParaDecl.Next;
+    if not DASQL.SelParaDecl.eof then
+      PStockee.R_Centralisateur.SQL.Add('or  ');
+  end;
+  PStockee.R_Centralisateur.SQL.Add('GROUP BY Journal');
+
+  {for i:=0 to PStockee.R_Centralisateur.SQL.Count -1 do
+  begin
+    showMessage(PStockee.R_Centralisateur.SQL[i]);
+  end;}
+  PStockee.R_Centralisateur.Open;
+end;
+
+
+procedure TFRembTVA.Requete;
+begin
+  S_RRembTVA.DataSet:=PStockee.RRembTVA;
+  PStockee.RRembTVA.close;
+  PStockee.RRembTVA.SQL.Clear;
+  PStockee.RRembTVA.SQL.Add('INSERT INTO '+Edit1.text+' (LigneTVA, DateFact, NumFact, CompteFnrs, Fournisseur, ObjetFact,');
+  PStockee.RRembTVA.SQL.Add('MontantHT, MontantTVA, DateRglt, NIF, Stat, TP, QUIT,      DateTP, DateQuit, Adresse, PcsAchat,');
+  PStockee.RRembTVA.SQL.Add('PcsRglt, lettra, MtRetenu )');
+  PStockee.RRembTVA.SQL.Add('SELECT Numero, DateEsc, NumFact, Tiers, RS, ObjetFact,');
+  PStockee.RRembTVA.SQL.Add('CASE WHEN HTLigne<>0 THEN HTLigne ELSE MTaux END AS Expr1, MontantTVA, DtPaie,');
+  PStockee.RRembTVA.SQL.Add('NIF, Statistique, TP,  Quittance, DateTP, DateQuit, Adresse, JrAchat, JrRglt, lettra, MtRetenu');
+  PStockee.RRembTVA.SQL.Add('FROM RembTVA2');
+  PStockee.RRembTVA.SQL.Add('where (periode>=:a)and(periode<=:b)');
+  if not CheckBox1.Checked then // Pas de report à nouveau
+    PStockee.RRembTVA.SQL.Add('and((JrTVA<''AN'')or(JrTVA>''ANZ''))');
+  if  CheckBox3.Checked then // Pas de règlement
+    PStockee.RRembTVA.SQL.Add('and((DtPaie is null)and((Tiers>=''52'')or(Tiers<''51'')))');
+  //=======Enlever centralisateur
+  PStockee.R_Centralisateur.First;
+  if not PStockee.R_Centralisateur.Eof then
+  begin
+    PStockee.RRembTVA.SQL.Add('  and(');
+    while not PStockee.R_Centralisateur.Eof do
+    begin
+      PStockee.RRembTVA.SQL.Add('(JrTVA<>'''+PStockee.R_CentralisateurJournal.Value +''')');
+      PStockee.R_Centralisateur.Next;
+      if not PStockee.R_Centralisateur.Eof then
+        PStockee.RRembTVA.SQL.Add('  and');
+    end;
+    PStockee.RRembTVA.SQL.Add(')');
+  end;
+  PStockee.RRembTVA.SQL.Add('and((rubrique>=''Ligne5'')and(rubrique<=''Ligne6Z''))'); //Ligne5Z no teo
+  PStockee.RRembTVA.Parameters[0].Value:=periodede;
+  PStockee.RRembTVA.Parameters[1].Value:=periodea;
+  if not OuvrirCopie then
+  begin
+    CreerCopie;
+    OuvrirCopie;
+    //showMessage('N''existe pas');
+  end
+  else
+  begin
+    PStockee.ViderFichier(Edit1.text);
+    //showMessage('existe');
+  end;
+  PStockee.RRembTVA.ExecSQL;
+  //showMessage('Copie vita');
+
+  PStockee.RRembTVA.SQL[0]:='';
+  PStockee.RRembTVA.SQL[1]:='select *';
+  PStockee.RRembTVA.Open;
+end;
+
+
+procedure TFRembTVA.CreerCopie;
+begin
+    PStockee.CreTRembTVA.SQL.Clear;
+    PStockee.CreTRembTVA.SQL.Add('Create Table '+ edit1.text+'(');
+    PStockee.CreTRembTVA.SQL.Add('LigneTVA integer,');
+    PStockee.CreTRembTVA.SQL.Add('DateFact Date,');
+    PStockee.CreTRembTVA.SQL.Add('NumFact char(40),');
+    PStockee.CreTRembTVA.SQL.Add('CompteFnrs char(20),');
+    PStockee.CreTRembTVA.SQL.Add('Fournisseur char(40),');
+    PStockee.CreTRembTVA.SQL.Add('ObjetFact char(60),');
+    PStockee.CreTRembTVA.SQL.Add('MontantHT Float,');
+    PStockee.CreTRembTVA.SQL.Add('MontantTVA Float,');
+    PStockee.CreTRembTVA.SQL.Add('DateRglt Date,');
+    PStockee.CreTRembTVA.SQL.Add('NIF char(20),');
+    PStockee.CreTRembTVA.SQL.Add('Stat char(10),');
+    PStockee.CreTRembTVA.SQL.Add('TP char(20),');
+    PStockee.CreTRembTVA.SQL.Add('QUIT char(20),');
+    PStockee.CreTRembTVA.SQL.Add('DateTP date,');
+    PStockee.CreTRembTVA.SQL.Add('DateQuit date,');
+    PStockee.CreTRembTVA.SQL.Add('Adresse char(40),');
+    PStockee.CreTRembTVA.SQL.Add('PcsAchat char(10),');
+    PStockee.CreTRembTVA.SQL.Add('PcsRglt char(30),');
+    PStockee.CreTRembTVA.SQL.Add('Lettra char(5),');
+    PStockee.CreTRembTVA.SQL.Add('MtRetenu char(15)');
+    PStockee.CreTRembTVA.SQL.Add(')');
+    //for i:=0 to PStockee.CreTRembTVA.SQL.count-1 do
+      //showMessage(PStockee.CreTRembTVA.SQL[i]);
+    PStockee.CreTRembTVA.ExecSQL;
+end;
+
+procedure TFRembTVA.SpeedButton5Click(Sender: TObject);
+begin
+  Periodede:=edit4.text+'/'+formatfloat('00',ComboBox2.ItemIndex+1);
+  PeriodeA :=edit3.text+'/'+formatfloat('00',ComboBox1.ItemIndex+1);
+  Requete;
+end;
+
+procedure TFRembTVA.SpeedButton1Click(Sender: TObject);
+begin
+   AsehoyLettrage(0,false,Commun.SocieteCode.Value,PStockee.RRembTVATiers.Value);
+   PStockee.RRembTVA.Requery;
+end;
+
+procedure TFRembTVA.SpeedButton3Click(Sender: TObject);
+begin
+  FEtaRemTVA.QuickRep1.Preview;
+end;
+
+procedure TFRembTVA.SpeedButton11Click(Sender: TObject);
+begin
+  if not OuvrirCopie then
+    showMessage('Impossible d''ouvrir ' +Edit1.text);
+end;
+
+function TFRembTVA.OuvrirCopie:boolean;
+begin
+  try
+    PStockee.CopieRembTVA.Close;
+    PStockee.CopieRembTVA.SQL.Clear;
+    PStockee.CopieRembTVA.SQL.Add('select * from '+Edit1.text);
+    PStockee.CopieRembTVA.SQL.Add('order by DateFact');
+    PStockee.CopieRembTVA.Open;
+    Result:=True;
+  except
+      Result:=False;
+  end;
+end;
+
+
+procedure TFRembTVA.SpeedButton7Click(Sender: TObject);
+begin
+  AsehoyLettrage(0,false,Commun.SocieteCode.Value,PStockee.Q_RembTVAByLigneCompteFnrs.Value);
+end;
+
+procedure TFRembTVA.SpeedButton9Click(Sender: TObject);
+begin
+  case RadioGroup1.ItemIndex of
+    0:FEtaRemTVA.QuickRep2.Preview;
+    1:FEtaRemTVA.QuickRep3.Preview;
+    2:begin
+        PStockee.CopieRembTVA.Close;
+        PStockee.CopieRembTVA.SQL.Clear;
+        PStockee.CopieRembTVA.SQL.Add('select * from '+Edit1.text);
+        PStockee.CopieRembTVA.SQL.Add('order by Fournisseur, DateFact');
+        PStockee.CopieRembTVA.Open;
+        FEtaRemTVA.QuickRep4.Preview;
+      end;
+  end;
+end;
+
+procedure TFRembTVA.DBEdit7Change(Sender: TObject);
+begin
+  PStockee.Q_NumCpt.Close;
+  PStockee.Q_NumCpt.Parameters[0].Value:=DBEdit7.EditText;
+  PStockee.Q_NumCpt.Open;
+  PStockee.Q_NumDiver.Close;
+  PStockee.Q_NumDiver.Parameters[0].Value:=DBEdit7.EditText;
+  PStockee.Q_NumDiver.Open;
+  DBEdit2.EditText:=PStockee.Q_NumCptIntitule.Value;
+  DBEdit13.EditText:=PStockee.Q_NumDiverNiF.Value;
+  DBEdit14.EditText:=PStockee.Q_NumDiverStatistique.Value;
+end;
+
+procedure TFRembTVA.SpeedButton4Click(Sender: TObject);
+begin
+  if not Panel2.Visible then
+  begin
+    Panel2.Visible:=True;
+    PStockee.RRembTVA_Facture.Close;
+    PStockee.RRembTVA_Facture.Parameters[0].Value:=PStockee.CopieRembTVAPcsAchat.Value;;
+    PStockee.RRembTVA_Facture.Open;
+  end
+  else
+    Panel2.Visible:=False;
+end;
+
+procedure TFRembTVA.S_CopieRembTVADataChange(Sender: TObject;
+  Field: TField);
+begin
+  Panel2.Visible:=False;
+  Panel3.Visible:=False;
+  ComboBox3.Text:= PStockee.CopieRembTVAMtRetenu.value;
+end;
+
+procedure TFRembTVA.SpeedButton8Click(Sender: TObject);
+begin
+  if not Panel3.Visible then
+  begin
+    Panel3.Visible:=True;
+    PStockee.RRembTVA_Rglt.Close;
+    PStockee.RRembTVA_Rglt.Parameters[0].Value:=PStockee.CopieRembTVALettra.Value;;
+    PStockee.RRembTVA_Rglt.Parameters[1].Value:=PStockee.CopieRembTVALigneTVA.Value;;
+    PStockee.RRembTVA_Rglt.Open;
+  end
+  else
+    Panel3.Visible:=False;
+end;
+
+procedure TFRembTVA.SpeedButton10Click(Sender: TObject);
+var ordre:string;
+begin
+  PStockee.CopieRembTVA.Close;
+  PStockee.CopieRembTVA.SQL.Clear;
+  PStockee.CopieRembTVA.SQL.Add( 'select * from '+Edit1.text);
+  if ComboBox3.text<>'Tous' then
+    PStockee.CopieRembTVA.SQL.Add('where MtRetenu='''+ComboBox3.text+'''');
+  case RadioGroup2.ItemIndex  of
+    0:Ordre:='PcsAchat,DateFact';
+    1:Ordre:='DateFact';
+    2:Ordre:='Fournisseur,DateFact';
+  end;
+  PStockee.CopieRembTVA.SQL.Add('order by '+ordre );
+  PStockee.CopieRembTVA.Open;
+end;
+
+end.

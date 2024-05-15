@@ -1,0 +1,776 @@
+unit AnnexTVA;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Qrctrls, quickrpt, ExtCtrls, StdCtrls, Db, DBTables;
+
+type
+  TFAnnexTVA = class(TForm)
+    QuickRep4: TQuickRep;
+    QRBand16: TQRBand;
+    QRSysData10: TQRSysData;
+    QRBand17: TQRBand;
+    QRShape66: TQRShape;
+    QRBand18: TQRBand;
+    QRBand1: TQRBand;
+    QRShape57: TQRShape;
+    QRShape60: TQRShape;
+    QRShape20: TQRShape;
+    QRLabel58: TQRLabel;
+    QRLabel59: TQRLabel;
+    QRShape56: TQRShape;
+    QRLabel11: TQRLabel;
+    QRBand14: TQRBand;
+    QRDBText7: TQRDBText;
+    QRShape50: TQRShape;
+    QRShape54: TQRShape;
+    QRShape55: TQRShape;
+    QRDBText37: TQRDBText;
+    QRDBText33: TQRDBText;
+    QRShape2: TQRShape;
+    QRDBText1: TQRDBText;
+    QRShape4: TQRShape;
+    QRBand3: TQRBand;
+    QRGroup1: TQRGroup;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRShape1: TQRShape;
+    QRLabel3: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRShape3: TQRShape;
+    QRDBText6: TQRDBText;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRDBText8: TQRDBText;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRLabel6: TQRLabel;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    QRShape9: TQRShape;
+    QRShape10: TQRShape;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel20: TQRLabel;
+    QuickRep1: TQuickRep;
+    QRBand2: TQRBand;
+    QRSysData3: TQRSysData;
+    QRBand4: TQRBand;
+    QRExpr5: TQRExpr;
+    QRShape34: TQRShape;
+    QRShape35: TQRShape;
+    QRLabel41: TQRLabel;
+    QRBand5: TQRBand;
+    QRBand6: TQRBand;
+    QRLabel25: TQRLabel;
+    QRShape11: TQRShape;
+    QRLabel28: TQRLabel;
+    QRLabel29: TQRLabel;
+    QRShape15: TQRShape;
+    QRLabel31: TQRLabel;
+    QRLabel36: TQRLabel;
+    QRLabel38: TQRLabel;
+    QRShape21: TQRShape;
+    QRBand7: TQRBand;
+    QRDBText11: TQRDBText;
+    QRShape22: TQRShape;
+    QRDBText12: TQRDBText;
+    QRShape23: TQRShape;
+    QRShape25: TQRShape;
+    QRDBText14: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRShape33: TQRShape;
+    QRLabel39: TQRLabel;
+    QRBand13: TQRBand;
+    QRExpr9: TQRExpr;
+    QRShape38: TQRShape;
+    QRShape39: TQRShape;
+    QRLabel46: TQRLabel;
+    QRGroup2: TQRGroup;
+    QRGroup3: TQRGroup;
+    QRBand8: TQRBand;
+    QRShape26: TQRShape;
+    QRShape27: TQRShape;
+    QRShape30: TQRShape;
+    QRShape31: TQRShape;
+    QRShape41: TQRShape;
+    QRLabel23: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel32: TQRLabel;
+    QRLabel33: TQRLabel;
+    QRLabel34: TQRLabel;
+    QRLabel35: TQRLabel;
+    QRLabel37: TQRLabel;
+    QRLabel44: TQRLabel;
+    QRDBText19: TQRDBText;
+    QRLabel48: TQRLabel;
+    QRLabel49: TQRLabel;
+    QRLabel50: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRShape12: TQRShape;
+    QRLabel26: TQRLabel;
+    QRExpr3: TQRExpr;
+    QRDBText13: TQRDBText;
+    QRLabel27: TQRLabel;
+    QRLabel47: TQRLabel;
+    QRLabel51: TQRLabel;
+    QRLabel52: TQRLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    QRShape14: TQRShape;
+    QRLabel53: TQRLabel;
+    QRLabel54: TQRLabel;
+    QRLabel55: TQRLabel;
+    QRShape16: TQRShape;
+    QRLabel56: TQRLabel;
+    QRSysData1: TQRSysData;
+    QRLabel57: TQRLabel;
+    QRLabel62: TQRLabel;
+    QRSysData2: TQRSysData;
+    QRLabel63: TQRLabel;
+    QRLabel65: TQRLabel;
+    QRShape17: TQRShape;
+    QRShape18: TQRShape;
+    QRShape24: TQRShape;
+    QRLabel64: TQRLabel;
+    QRLabel60: TQRLabel;
+    QRLabel61: TQRLabel;
+    QuickRep2: TQuickRep;
+    QRBand9: TQRBand;
+    QRSysData5: TQRSysData;
+    QRBand10: TQRBand;
+    QRShape29: TQRShape;
+    QRExpr4: TQRExpr;
+    QRBand11: TQRBand;
+    QRLabel66: TQRLabel;
+    QRSysData6: TQRSysData;
+    QRLabel71: TQRLabel;
+    QRDBText54: TQRDBText;
+    QRDBText55: TQRDBText;
+    QRLabel72: TQRLabel;
+    QRDBText60: TQRDBText;
+    QRBand12: TQRBand;
+    QRLabel67: TQRLabel;
+    QRLabel68: TQRLabel;
+    QRLabel69: TQRLabel;
+    QRShape32: TQRShape;
+    QRLabel70: TQRLabel;
+    QRShape42: TQRShape;
+    QRShape43: TQRShape;
+    QRShape44: TQRShape;
+    QRLabel73: TQRLabel;
+    QRShape45: TQRShape;
+    QRLabel74: TQRLabel;
+    QRBand15: TQRBand;
+    QRDBText15: TQRDBText;
+    QRShape46: TQRShape;
+    QRDBText16: TQRDBText;
+    QRDBText20: TQRDBText;
+    QRShape47: TQRShape;
+    QRShape48: TQRShape;
+    QRShape49: TQRShape;
+    QRDBText22: TQRDBText;
+    QRDBText23: TQRDBText;
+    QRShape51: TQRShape;
+    QRGroup4: TQRGroup;
+    QRExpr7: TQRExpr;
+    QRBand19: TQRBand;
+    QRExpr6: TQRExpr;
+    QRShape52: TQRShape;
+    QRGroup5: TQRGroup;
+    QRShape53: TQRShape;
+    QRShape58: TQRShape;
+    QRShape59: TQRShape;
+    QRExpr14: TQRExpr;
+    QRExpr15: TQRExpr;
+    QRExpr16: TQRExpr;
+    QRShape61: TQRShape;
+    QRShape62: TQRShape;
+    QRShape63: TQRShape;
+    QRExpr17: TQRExpr;
+    QRExpr18: TQRExpr;
+    QRExpr20: TQRExpr;
+    QRExpr10: TQRExpr;
+    QRLabel76: TQRLabel;
+    QRShape65: TQRShape;
+    QRLabel75: TQRLabel;
+    QRExpr8: TQRExpr;
+    QRBand20: TQRBand;
+    QRShape67: TQRShape;
+    QRExpr12: TQRExpr;
+    QRShape68: TQRShape;
+    QRShape69: TQRShape;
+    QRShape70: TQRShape;
+    QRExpr13: TQRExpr;
+    QRExpr19: TQRExpr;
+    QRExpr21: TQRExpr;
+    QRExpr22: TQRExpr;
+    QRDBText21: TQRDBText;
+    QRShape71: TQRShape;
+    QRDBText10: TQRDBText;
+    QRDBText24: TQRDBText;
+    QRDBText25: TQRDBText;
+    QRDBText40: TQRDBText;
+    QRDBText26: TQRDBText;
+    QRDBText88: TQRDBText;
+    QRLabel21: TQRLabel;
+    QRLabel77: TQRLabel;
+    QRLabel78: TQRLabel;
+    QRLabel79: TQRLabel;
+    QRShape19: TQRShape;
+    QRExpr23: TQRExpr;
+    procedure QRBand14BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand3BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand17BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand18BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRDBText14Print(sender: TObject; var Value: String);
+    procedure QRExpr9Print(sender: TObject; var Value: String);
+    procedure QRBand5BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRExpr5Print(sender: TObject; var Value: String);
+    procedure QRExpr3Print(sender: TObject; var Value: String);
+    procedure QRGroup2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand8BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand3AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRExpr1Print(sender: TObject; var Value: String);
+    procedure QRLabel5Print(sender: TObject; var Value: String);
+    procedure QRBand8AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRLabel27Print(sender: TObject; var Value: String);
+    procedure QRLabel47Print(sender: TObject; var Value: String);
+    procedure QRLabel51Print(sender: TObject; var Value: String);
+    procedure QRLabel52Print(sender: TObject; var Value: String);
+    procedure QRLabel46Print(sender: TObject; var Value: String);
+    procedure QRLabel22Print(sender: TObject; var Value: String);
+    procedure QuickRep4BeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+    procedure QuickRep1BeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+    procedure QuickRep2BeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+    procedure QRLabel21Print(sender: TObject; var Value: String);
+  private
+    taxe,totTaxe:real;
+    opt:shortint;
+    periodeDe,periodeA,Ligne,detenteur:string;
+    AvecTaux:boolean;
+    impor:boolean;
+    NIF,STAT:string[20];
+    Nom,Adresse:string[100];
+    MOntHT,MontTVA,MontTTC:real;
+    isViewSource, misyAN:boolean;
+    procedure RequeteFournisseur(Typ:string;IsAN:boolean);
+    procedure RequeteClient(typ:string;IsAN:boolean);
+  public
+    { Déclarations publiques }
+    procedure Imprimeo(et,perDe,perA,Lg,detente:string;avectx:boolean;typ,option:shortint;viewSource,isFichier,IsAN:boolean);
+  end;
+
+var
+  FAnnexTVA: TFAnnexTVA;
+
+implementation
+
+uses Daspecia, DaCommun,  TypeElmt, USQL, UPStocke;
+
+{$R *.DFM}
+
+procedure TFAnnexTVA.Imprimeo(et,perDe,perA,Lg,detente:string;avectx:boolean;typ,option:shortint;viewSource,isFichier,IsAN:boolean);
+begin
+ misyAN:=IsAN;
+ periodeDe:=perDe;
+ periodeA:=perA;
+ avecTaux:=avectx;
+ isViewSource:=viewSource;
+ opt:=option;
+ Ligne:=Lg;
+ detenteur:=detente;
+ Label1.Caption;
+ case typ of
+   0:{LISTE DES CLIENTS}
+     begin
+       if isFichier then
+         RequeteClient('Création',IsAN)
+       else
+         QuickRep4.preview;
+     end;
+   1:{LISTE DES FOURNISSUERS}
+     begin
+       if isFichier then
+         RequeteFournisseur('Création',IsAN)
+       else
+         QuickRep1.preview;
+     end;
+   2:{RECAPITULATIF C.A}
+     begin
+       QuickRep2.preview;
+     end;
+ end;
+end;
+
+procedure TFAnnexTVA.QRBand14BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var compte:string;
+begin
+  Commun.SelTaxe.close;
+  compte:=EnleveBlancDroite(DASQL.DetTaxeTVACompte.Value);
+  if length(Compte)>0 then
+    Commun.SelTaxe.Parameters[0].Value:=Compte
+  else
+    Commun.SelTaxe.Parameters[0].Value:='X';
+  Commun.SelTaxe.Open;
+  Taxe:=Taxe+DASQL.DetTaxeSMontant.Value*DASQL.DetTaxeTaux.Value/100;
+  QRLabel4.Caption:=FormatFloat('#,##0',DASQL.DetTaxeSMontant.Value*DASQL.DetTaxeTaux.Value/100)
+end;
+
+procedure TFAnnexTVA.QRBand3BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  TotTaxe:=TotTaxe+Taxe;
+  QRLabel5.Caption:=FormatFloat('#,##0',Taxe);
+  Taxe:=0;
+end;
+
+procedure TFAnnexTVA.QRBand17BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QRLabel6.Caption:=FormatFloat('#,##0',TotTaxe);
+end;
+
+procedure TFAnnexTVA.QRBand18BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var i :integer;
+begin
+  QRLabel19.Caption:=copy(periodeDe,1,4);
+  if periodeDe=periodeA then
+  begin
+    i:=strtoint(copy(periodeDe,6,2));
+    QRLabel18.Caption:= special.stmois[i];
+    QRLabel20.Caption:='';
+  end
+  else
+  begin
+    i:=strtoint(copy(periodeDe,6,2));
+    QRLabel18.Caption:='';
+    QRLabel20.Caption:=inttostr(((i-1) div 3)+1);
+  end;
+  Label1.Caption:=detenteur;
+{  i:=strtoint(copy(periodeDe,6,2));
+  QRLabel18.Caption:= special.stmois[i];
+  QRLabel20.Caption:=inttostr(((i-1) div 3)+1);
+  }
+end;
+
+procedure TFAnnexTVA.QRDBText14Print(sender: TObject; var Value: String);
+var tva:double;
+begin
+  if not AvadihoReal(value,tva) then tva:=0;
+  QRLabel39.Caption:=FormatFloat('#,##0',(tva/DaSQL.DetTaxeTauxTVA.Value)*100);
+end;
+
+procedure TFAnnexTVA.QRExpr9Print(sender: TObject; var Value: String);
+var tva:double;
+    StValue:string;
+begin
+  StValue:=enleveblanc(value);
+  tva:=strtofloat(StValue);
+  QRLabel46.Caption:=FormatFloat('#,##0',(tva/DaSQL.DetTaxeTauxTVA.Value )*100);
+end;
+
+procedure TFAnnexTVA.QRBand5BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var i :integer;
+begin
+  QRLabel49.Caption:=copy(periodeDe,1,4);
+  if periodeDe=periodeA then
+  begin
+    i:=strtoint(copy(periodeDe,6,2));
+    QRLabel48.Caption:= special.stmois[i];
+    QRLabel50.Caption:='';
+  end
+  else
+  begin
+    i:=strtoint(copy(periodeDe,6,2));
+    QRLabel48.Caption:='';
+    QRLabel50.Caption:=inttostr(((i-1) div 3)+1);
+  end;
+end;
+
+procedure TFAnnexTVA.QRExpr5Print(sender: TObject; var Value: String);
+var tva:double;
+begin
+  if not AvadihoReal(value,tva) then tva:=0;
+  QRLabel41.Caption:=FormatFloat('#,##0',(tva/DaSQL.DetTaxeTauxTVA.Value)*100);
+end;
+
+procedure TFAnnexTVA.QRExpr3Print(sender: TObject; var Value: String);
+var tva:double;
+var txtvalue:string;
+begin
+  txtvalue:=enleveBlanc(value);
+  MontTVA:= strtofloat(txtvalue);
+  if not AvadihoReal(value,tva) then tva:=0;
+  QRLabel21.Caption:=FormatFloat('#,##0',(tva/DaSQL.DetTaxeTauxTVA.Value)*100);
+end;
+
+procedure TFAnnexTVA.QRGroup2BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  impor:=false;
+  DASQL.SelectParam('TVA','Ligne51g');
+  if DASQL.DansParam(DASQL.DetTaxeCompte.Value) then impor:=true;
+  DASQL.SelectParam('TVA','Ligne52g');
+  if DASQL.DansParam(DASQL.DetTaxeCompte.Value) then impor:=true;
+  DASQL.SelectParam('TVA','Ligne53g');
+  if DASQL.DansParam(DASQL.DetTaxeCompte.Value) then impor:=true;
+end;
+
+procedure TFAnnexTVA.QRBand8BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  special.TNumAdres.Open;
+  QRLabel27.Caption:=DASQL.DetTaxeNIF.Value;
+  QRLabel47.Caption:=DASQL.DetTaxeStatistique.Value;
+  if not DASQL.DetTaxeimport.Value then
+  begin
+    QRLabel51.Caption:=DASQL.DetTaxeNom.Value;
+    QRLabel52.Caption:=DASQL.DetTaxeAdresse.Value;
+  end
+  else
+  begin
+    QRLabel51.Caption:='Douane';
+    QRLabel52.Caption:='Décl N° '+DASQL.DetTaxeNumFact.Value+
+                       ' du '+DateTimeToStr(DASQL.DetTaxeDateEsc.Value);
+  end;
+end;
+
+procedure TFAnnexTVA.QRBand3AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  Special.TANNEXTVA.Insert;
+  Special.TANNEXTVANOM.Value := DASQL.DetTaxeNom.Value ;
+  Special.TANNEXTVAADRESSE.Value :=DASQL.DetTaxeAdresse.Value  ;
+  Special.TANNEXTVANIF.Value := DASQL.DetTaxeNIF.Value   ;
+  Special.TANNEXTVASTAT.Value := DASQL.DetTaxeStatistique.Value   ;
+  Special.TANNEXTVAMONTHT.Value := MontHT ;
+  Special.TANNEXTVATVA.Value := MontTVA;
+  Special.TANNEXTVA.Post;
+end;
+
+procedure TFAnnexTVA.QRExpr1Print(sender: TObject; var Value: String);
+var txt:string;
+begin
+  txt:=enleveBlanc(value);
+  MontHT:= strtofloat(txt);
+end;
+
+procedure TFAnnexTVA.QRLabel5Print(sender: TObject; var Value: String);
+var txtvalue:string;
+begin
+  txtvalue:=enleveBlanc(value);
+  MontTVA:= strtofloat(txtvalue);
+end;
+
+procedure TFAnnexTVA.QRBand8AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  Special.TANNEXTVA.Insert;
+  Special.TANNEXTVANOM.Value     := Nom;
+  Special.TANNEXTVAADRESSE.Value := Adresse;
+  Special.TANNEXTVANIF.Value     := NIF;
+  Special.TANNEXTVASTAT.Value    := Stat ;
+  Special.TANNEXTVAMONTHT.Value  := MontHT;
+  Special.TANNEXTVATVA.Value     := MontTVA;
+  Special.TANNEXTVA.Post;
+end;
+
+procedure TFAnnexTVA.QRLabel27Print(sender: TObject; var Value: String);
+begin
+  NIF:=value;
+end;
+
+procedure TFAnnexTVA.QRLabel47Print(sender: TObject; var Value: String);
+begin
+  STAT:=value;
+end;
+
+procedure TFAnnexTVA.QRLabel51Print(sender: TObject; var Value: String);
+begin
+  Nom:=value;
+end;
+
+procedure TFAnnexTVA.QRLabel52Print(sender: TObject; var Value: String);
+begin
+  Adresse:=value;
+end;
+
+procedure TFAnnexTVA.QRLabel46Print(sender: TObject; var Value: String);
+var txt:string;
+begin
+  txt:=enleveBlanc(value);
+  MontHT:= strtofloat(txt);
+end;
+
+procedure TFAnnexTVA.QRLabel22Print(sender: TObject; var Value: String);
+var txt:string;
+begin
+  txt:=enleveBlanc(value);
+  MontTTC:= strtofloat(txt);
+end;
+
+
+procedure TFAnnexTVA.RequeteClient(typ:string;IsAN:boolean);
+var i:integer;
+  first:boolean;
+ stsq:string;
+begin
+  DASQL.DetTaxe.close;
+  DASQL.DetTaxe.SQL.Clear;
+  DASQL.DetTaxe.SQL.Add('select * from Declare');
+  DASQL.DetTaxe.SQL.Add('Where (periode>=:a)and(periode<=:b)');
+  if not IsAN then
+     DASQL.DetTaxe.SQL.Add('and (Typ<>4)');
+  DASQL.DetTaxe.SQL.Add('and(');
+  DASQL.SelParaDecl.close;
+  DASQL.SelParaDecl.Parameters[1].Value:='Ligne1ab';
+  DASQL.SelParaDecl.Parameters[2].Value:='Ligne1abZ';
+  DASQL.SelParaDecl.Open;
+  first:=true;
+  if not DASQL.SelParaDecl.EOF then
+  begin
+    while not DASQL.SelParaDecl.EOF do
+    begin
+      first:=false;
+      DASQL.DetTaxe.SQL.Add('((Compte>='''+DASQL.SelParaDeclCompteDe.Value+''')'+
+      'and(Compte<'''+DASQL.SelParaDeclCompteA.Value+'Z''))');
+      DASQL.SelParaDecl.Next;
+      if not DASQL.SelParaDecl.EOF then DASQL.DetTaxe.SQL.Add(' or ');
+    end;
+  end;
+  DASQL.SelParaDecl.close;
+  DASQL.SelParaDecl.Parameters[1].Value:='Ligne2ab';
+  DASQL.SelParaDecl.Parameters[2].Value:='Ligne2abZ';
+  DASQL.SelParaDecl.Open;
+  if not DASQL.SelParaDecl.EOF then
+  begin
+    if not first then DASQL.DetTaxe.SQL.Add(' or');
+    while not DASQL.SelParaDecl.EOF do
+    begin
+      DASQL.DetTaxe.SQL.Add('((Compte>='''+DASQL.SelParaDeclCompteDe.Value+''')'+
+      'and(Compte<'''+DASQL.SelParaDeclCompteA.Value+'Z''))');
+      DASQL.SelParaDecl.Next;
+      if not DASQL.SelParaDecl.EOF then DASQL.DetTaxe.SQL.Add(' or ');
+    end;
+    first:=false;
+  end;
+  DASQL.SelParaDecl.close;
+  DASQL.SelParaDecl.Parameters[1].Value:='Ligne3ab';
+  DASQL.SelParaDecl.Parameters[2].Value:='Ligne3abZ';
+  DASQL.SelParaDecl.Open;
+  if not DASQL.SelParaDecl.EOF then
+  begin
+    if not first then DASQL.DetTaxe.SQL.Add(' or ');
+    while not DASQL.SelParaDecl.EOF do
+    begin
+      DASQL.DetTaxe.SQL.Add('((Compte>='''+DASQL.SelParaDeclCompteDe.Value+''')'+
+      'and(Compte<'''+DASQL.SelParaDeclCompteA.Value+'Z''))');
+      DASQL.SelParaDecl.Next;
+      if not DASQL.SelParaDecl.EOF then DASQL.DetTaxe.SQL.Add(' or ');
+    end;
+  end;
+  DASQL.DetTaxe.SQL.Add(')');
+  DASQL.DetTaxe.SQL.Add('order by Tiers, Periode, Code');
+  DASQL.DetTaxe.Parameters[0].Value:=periodede;
+  DASQL.DetTaxe.Parameters[1].Value:=periodea;
+  stsq:='';
+  for i:=0 to DASQL.DetTaxe.SQL.count-1 do
+  begin
+    stsq:=stsq+ DASQL.DetTaxe.SQL[i]+'  ';
+  end;
+  DASQL.DetTaxe.Open;
+
+
+  if Typ='Création' then
+  begin
+    PStockee.supprimerTout('Document','lstClient');
+    DASQL.lstClient.Open;
+    i:=0;
+    while not DASQL.DetTaxe.EOF do
+    begin
+      i:=i+1;
+      DASQL.lstClient.Insert;
+      DASQL.lstClientTVA.Value    := DASQL.DetTaxeMontant.Value;
+      DASQL.lstClientNIF.Value    := DASQL.DetTaxeNIF.Value;
+      DASQL.lstClientStat.Value   := DASQL.DetTaxeStatistique.Value;
+      DASQL.lstClientRS.Value     := DASQL.DetTaxeNom.Value;
+      DASQL.lstClientAdresse.Value:= DASQL.DetTaxeAdresse.Value;
+      DASQL.lstClientCompte.Value:= DASQL.DetTaxeCompte.Value;
+      DASQL.lstClientIntitule.Value:= DASQL.DetTaxeIntitule.Value;
+      DASQL.lstClientDebit.Value:= DASQL.DetTaxeDebit.Value;
+      DASQL.DetTaxe.Next;
+    end;
+    showMessage('vita '+inttostr(i));
+  end
+end;
+
+procedure TFAnnexTVA.QuickRep4BeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+  if not isViewSource then QRLabel77.Caption:='';
+  Taxe:=0;
+  TotTaxe:=0;
+  Commun.SelTaxe.close;
+  Commun.SelTaxe.SQL.clear;
+  Commun.SelTaxe.SQL.Add('select * from Taxe');
+  Commun.SelTaxe.SQL.Add('where (sigle=:x)');
+  RequeteClient('SElection',misyAN);
+  QRGroup1.Height:=0;
+  if not avecTaux then QRBand14.Height:=0;
+  PStockee.supprimerTout('Document','AnnexCli');
+  Special.TANNEXTVA.Close;
+  Special.TANNEXTVA.TableName:='AnnexCli';
+  Special.TANNEXTVA.Open;
+end;
+
+procedure TFAnnexTVA.RequeteFournisseur(Typ:string; IsAN:boolean);
+var i:integer;
+begin
+  DASQL.DetTaxe.close;
+  DASQL.DetTaxe.SQL.Clear;                                             //
+  DASQL.DetTaxe.SQL.Add('select * from Declare');
+  DASQL.DetTaxe.SQL.Add('where (periode>=:a)and(periode<=:b)');
+  if not IsAN then
+     DASQL.DetTaxe.SQL.Add('and (Typ<>4)');
+  DASQL.SelParaDecl.close;
+  DASQL.SelParaDecl.Parameters[1].Value:='Ligne5';
+  DASQL.SelParaDecl.Parameters[2].Value:='Ligne5Z';
+  DASQL.SelParaDecl.Open;
+  if not DASQL.SelParaDecl.EOF then
+  begin
+    DASQL.DetTaxe.SQL.Add('  and(');
+    while not DASQL.SelParaDecl.EOF do
+    begin
+      DASQL.DetTaxe.SQL.Add('((Compte>='''+DASQL.SelParaDeclCompteDe.Value+''')'+
+      'and(Compte<'''+DASQL.SelParaDeclCompteA.Value+'Z''))');
+      DASQL.SelParaDecl.Next;
+      if not DASQL.SelParaDecl.EOF then DASQL.DetTaxe.SQL.Add(' or ');
+    end;
+    DASQL.DetTaxe.SQL.Add(')');
+  end;
+  if not AvecTaux then                          //
+    DASQL.DetTaxe.SQL.Add('order by Compte, Statistique1, Tiers, DateEsc')
+  else
+    DASQL.DetTaxe.SQL.Add('order by Compte, Tiers, DateEsc');
+  DASQL.DetTaxe.Parameters[0].Value:=periodede;
+  DASQL.DetTaxe.Parameters[1].Value:=periodea;
+  DASQL.DetTaxe.Open;
+
+
+  if Typ='Création' then
+  begin
+    PStockee.supprimerTout('Document','lstFrns');
+    DASQL.lstFrns.Open;
+    i:=0;
+    while not DASQL.DetTaxe.EOF do
+    begin
+      i:=i+1;
+      DASQL.lstFrns.Insert;
+      DASQL.lstFrnsTVA.Value    := DASQL.DetTaxeMontant.Value;
+      DASQL.lstFrnsNIF.Value    := DASQL.DetTaxeNIF.Value;
+      DASQL.lstFrnsStat.Value   := DASQL.DetTaxeStatistique.Value;
+      DASQL.lstFrnsRS.Value     := DASQL.DetTaxeNom.Value;
+      DASQL.lstFrnsAdresse.Value:= DASQL.DetTaxeAdresse.Value;
+      DASQL.lstFrnsCompte.Value:= DASQL.DetTaxeCompte.Value;
+      DASQL.lstFrnsIntitule.Value:= DASQL.DetTaxeIntitule.Value;
+      DASQL.lstFrnsDebit.Value:= DASQL.DetTaxeDebit.Value;
+      DASQL.DetTaxe.Next;
+    end;
+    showMessage('vita '+inttostr(i));
+  end
+end;
+
+procedure TFAnnexTVA.QuickRep1BeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+  if not isViewSource then
+    QRLabel78.Caption:= '';
+  DaSQL.mettreNumeroDouane:=True;
+  QRGroup3.Height:=0;
+  if not AvecTaux then
+  begin
+    QRBand7.Height:=0;
+    QRBand8.Frame.DrawTop:=false;
+    QRBand8.Frame.DrawBottom:=false;
+  end
+  else
+  begin
+    QRBand7.Height:=15;
+    QRBand8.Frame.DrawTop:=true;
+    QRBand8.Frame.DrawBottom:=true;
+  end;
+  RequeteFournisseur('Selection',misyAN);
+  PStockee.supprimerTout('Document','AnnexFou');
+  Special.TANNEXTVA.Close;
+  Special.TANNEXTVA.TableName:='AnnexFou';
+  Special.TANNEXTVA.Open;
+end;
+
+procedure TFAnnexTVA.QuickRep2BeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+var x:integer;
+   y:integer;
+begin
+  if not isViewSource then QRLabel79.Caption:='';
+  DASQL.RecaTaxe.close;
+  DASQL.RecaTaxe.SQL.Clear;                         //, NumDiver z
+  DASQL.RecaTaxe.SQL.Add('select * from Declare ');
+  DASQL.RecaTaxe.SQL.Add('Where (periode>=:a)and(periode<=:b)');
+  if not misyAN then
+    DASQL.RecaTaxe.SQL.Add('and ((Code<''AN'')or(x.Code>''ANZ''))');
+  DASQL.RecaTaxe.SQL.Add('and (parametre=''TVA'')');
+  DASQL.RecaTaxe.SQL.Add('and((rubrique=''Ligne1ab'')or(rubrique=''Ligne2ab'')or(rubrique=''Ligne3ab''))');
+  DASQL.RecaTaxe.SQL.Add('order by rubrique, compte, DateEsc');
+  DASQL.RecaTaxe.Parameters[0].Value:=periodede;
+  DASQL.RecaTaxe.Parameters[1].Value:=periodea;
+  DASQL.RecaTaxe.Open;
+  x:=strtoint(copy(periodede,6,2));
+  y:=strtoint(copy(periodea,6,2));
+  QRLabel66.Caption:= 'Recap. C.A mois ';
+  QRLabel76.Caption:= ' de '+special.stmois[x]+' '+copy(periodede,1,4)+' à '+
+                      special.stmois[y]+' '+copy(periodea,1,4);
+  QRGroup5.Height:=0;
+end;
+
+procedure TFAnnexTVA.QRLabel21Print(sender: TObject; var Value: String);
+var txtvalue:string;
+begin
+  txtvalue:=enleveBlanc(value);
+  MontHT:= strtofloat(txtvalue);
+end;
+
+end.

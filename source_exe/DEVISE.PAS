@@ -1,0 +1,173 @@
+unit Devise;
+
+interface
+
+uses
+  SysUtils, WinTypes, WinProcs, Messages, Classes, Graphics, Controls,
+  StdCtrls, Forms, DBCtrls, DB, Buttons, Grids, DBGrids, DBTables, ExtCtrls;
+
+type
+  TForm21 = class(TForm)
+    ScrollBox: TScrollBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    DBGrid1: TDBGrid;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    DBNavigator: TDBNavigator;
+    SourceDevise: TDataSource;
+    BitBtn1: TBitBtn;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SourceDeviseDataChange(Sender: TObject; Field: TField);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+    ps:^string;
+    nochange:boolean;
+    procedure Fafao;
+    procedure Raiso(ajout:boolean);
+  public
+    { Déclarations publiques }
+    procedure Asehoy(var dev:string);
+  end;
+
+var
+  Form21: TForm21;
+
+procedure AmboaryDevise;export;
+procedure VonoyDevise;export;
+
+implementation
+
+uses DaCommun, Daspecia;
+
+{$R *.DFM}
+
+procedure AmboaryDevise;
+begin
+  Application.CreateForm(TForm21, Form21);
+end;
+
+procedure AsehoyDevise;
+begin
+end;
+
+procedure VonoyDevise;
+begin
+  Form21.hide;
+  Form21.free;
+end;
+
+procedure TForm21.Asehoy(var dev:string);
+begin
+  Nochange:=false;
+  ps:=@dev;
+  SourceDevise.dataSet:= Commun.devise;
+  Commun.devise.open;
+  ShowModal;
+end;
+
+
+procedure  TForm21.Fafao;
+begin
+  edit2.text:='';
+  edit3.text:='';
+  edit4.text:='';
+  edit1.text:='';
+end;
+
+procedure TForm21.Raiso(ajout:boolean);
+begin
+  NoChange:=true;
+  if ajout then Commun.devise.insert else Commun.devise.Edit;
+  try
+    Commun.deviseSigle.Value:=edit1.text;
+    Commun.deviseDenomination.Value:=edit2.text;
+    Commun.devisePays.Value:=edit3.text;
+    Commun.deviseContinent.Value:=edit4.text;
+    Commun.devise.post;
+    Commun.devise.requery;
+  except
+    on EDataBaseError do
+    begin
+      Application.MessageBox('Cette code existe déjà','Erreur de saisie',mb_ok);
+      Commun.devise.cancel;
+    end
+  end;
+  NoChange:=False;
+end;
+
+procedure TForm21.SpeedButton1Click(Sender: TObject);
+begin
+  Fafao;
+end;
+
+procedure TForm21.SourceDeviseDataChange(Sender: TObject; Field: TField);
+begin
+  if nochange then exit;
+  edit2.text:=Commun.deviseDenomination.Value;
+  edit3.text:=Commun.devisePays.Value;
+  edit4.text:=Commun.deviseContinent.Value;
+  edit1.text:=Commun.deviseSigle.Value;
+end;
+
+procedure TForm21.SpeedButton2Click(Sender: TObject);
+begin
+  Raiso(true);
+end;
+
+procedure TForm21.SpeedButton3Click(Sender: TObject);
+begin
+  Raiso(false);
+end;
+
+procedure TForm21.SpeedButton4Click(Sender: TObject);
+begin
+  if Application.MessageBox('Voulez-vous vraiement le supprimmer',
+         'Confirmation', mb_YesNo)=IDYES then
+    try
+      Commun.devise.delete;
+      Commun.devise.post;
+      Commun.devise.requery;
+    except
+      on EDataBaseError do
+    end;
+end;
+
+procedure TForm21.SpeedButton5Click(Sender: TObject);
+begin
+  edit1.text:=Commun.deviseSigle.Value;
+  edit2.text:=Commun.deviseDenomination.Value;
+  edit3.text:=Commun.devisePays.Value;
+  edit4.text:=Commun.deviseContinent.Value;
+end;
+
+procedure TForm21.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  SourceDevise.dataSet:=Special.Repos;
+end;
+
+
+
+procedure TForm21.BitBtn1Click(Sender: TObject);
+begin
+  close;
+end;
+
+end.

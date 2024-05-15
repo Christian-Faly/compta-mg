@@ -1,0 +1,310 @@
+unit UMoteur;
+
+interface
+
+uses
+  SysUtils, Classes, DB,
+
+  ShareMem, Windows, Messages,   Graphics, Controls, Forms, Dialogs,
+  DBTables,  menus, ADODB,UObjet,ExtCtrls,StdCtrls;
+
+type
+  TMoteur = class(TDataModule)
+    S_QListeDonnee: TDataSource;
+    S_Maitre1: TDataSource;
+    S_Maitre2: TDataSource;
+    S_MaitreList: TDataSource;
+    S_TableList: TDataSource;
+    procedure S_Maitre1DataChange(Sender: TObject; Field: TField);
+    procedure S_MaitreListDataChange(Sender: TObject; Field: TField);
+  private
+    { Private declarations }
+    Chem,ndf_M1,chp_M1,ndf_M2,chp_M2,
+    ndf_Det,Chp_Det1,Chp_Det2:string;
+  public
+    { Public declarations }
+     procedure InitMaitreDetail(chemin, ndf_Maitre, chp_Maitre,Ndf_Detail,Chp_Detail:string);
+     procedure InitMaitre2Detail(Chemin,ndf_Maitre1,chp_Maitre1,ndf_Maitre2,chp_Maitre2,
+                                  ndf_Detail,Chp_Detail1,Chp_Detail2:string);
+     procedure InitSaisiList(Chemin,ndf_Maitre1,chp_Maitre1,ndf_Maitre2,chp_Maitre2,
+                                  ndf_Detail,Chp_Detail1,Chp_Detail2:string);
+     procedure Choisir;
+     procedure RechercheChamps(ndf_Maitre1,Valeur_Maitre1,chp_Detail1,
+                                ndf_Maitre2,Valeur_Maitre2,chp_Detail2:string);
+     procedure FormerListChamps(Ndf:string;var ListChamps:TListChamps);
+     function ChercherType(DataType:TFieldType;var CharVe:boolean):string;
+     function CreationControle(Ndf:string;Panel:TPanel;debut:integer;
+                          ListeCheck:TListeCheck;ListeLabel:TListeLabel;
+                          ListeEdit:TListeEdit):integer;
+  end;
+
+var
+  Moteur: TMoteur;
+
+procedure CreerMoteur;
+procedure VonoyMoteur;
+
+implementation
+
+uses  SaisiDonnee2;
+
+{$R *.dfm}
+
+procedure CreerMoteur;
+begin
+  Application.CreateForm(TMoteur, Moteur);
+end;
+
+
+procedure VonoyMoteur;
+begin
+  Moteur.Free;
+end;
+
+procedure TMoteur.InitMaitreDetail(chemin, ndf_Maitre, chp_Maitre,
+                                             Ndf_Detail,Chp_Detail:string);
+begin
+  chem   := Chemin;
+  ndf_M1 := ndf_Maitre;
+  chp_M1 := chp_Maitre;
+  ndf_M2 := '';
+  chp_M2 := '';
+  Ndf_Det:= Ndf_Detail;
+  Chp_Det1:= Chp_Detail;
+  DObjet.ChangeConnection(Chemin);
+  DObjet.Maitre1.TableName:=Ndf_Maitre;
+  DObjet.QListDonnee.Close;
+  DObjet.QListDonnee.SQL.Clear;
+  DObjet.QListDonnee.SQL.Add('select * from '+ ndf_Det+' where '+ chp_Det1+'=:a');
+  DObjet.Maitre1.open;
+end;
+
+procedure TMoteur.FormerListChamps(Ndf:string;var ListChamps:TListChamps);
+var i: integer;
+    t: string;
+   cv: boolean;
+begin
+  DObjet.QListDonnee.Close;
+  DObjet.QListDonnee.SQL.Clear;
+  DObjet.QListDonnee.SQL.Add('select * from '+ ndf+' ');
+  DObjet.QListDonnee.open;
+  for i:=0 to DObjet.QListDonnee.FieldDefs.Count-1 do
+  begin
+    ListChamps[i].ndc := DObjet.QListDonnee.FieldDefs[i].Name;
+    ListChamps[i].Typ := ChercherType(DObjet.QListDonnee.FieldDefs[i].DataType,cv);
+    ListChamps[i].taille:= DObjet.QListDonnee.FieldDefs[i].Size;
+  end;
+end;
+
+function TMoteur.ChercherType(DataType:TFieldType;var CharVe:boolean):string;
+var TypeChamps:string;
+begin
+  CharVe:=false;
+  TypeChamps:='CHAR(50)';
+  case DataType of
+    ftUnknown     : TypeChamps:='Inconnu';
+    ftString      : begin TypeChamps:='CHAR'; CharVe:=True;end;
+    ftSmallint    : TypeChamps:='Smallint';
+    ftInteger     : TypeChamps:='Integer';
+    ftWord        : TypeChamps:='Smallint';
+    ftBoolean     : TypeChamps:='Smallint';
+    ftFloat       : TypeChamps:='Float';
+    ftCurrency    : TypeChamps:='Currency';
+    ftBCD         : TypeChamps:='BCD';
+    ftDate        : TypeChamps:='Date';
+    ftTime        : TypeChamps:='Time';
+    ftDateTime    : TypeChamps:='DateTime';
+    ftBytes       : TypeChamps:='Bytes';
+    ftVarBytes    : TypeChamps:='VarBytes';
+    ftAutoInc     : TypeChamps:='AutoIncrement';
+    ftBlob        : TypeChamps:='Blob';
+    ftMemo        : TypeChamps:='Memo';
+    ftGraphic     : TypeChamps:='Graphic';
+    ftFmtMemo     : TypeChamps:='FmtMemo';
+    ftParadoxOle  : TypeChamps:='ParadoxOle';
+    ftDBaseOle    : TypeChamps:='DBaseOle';
+    ftTypedBinary : TypeChamps:='TypedBinary';
+    ftCursor      : TypeChamps:='Cursor';
+    ftFixedChar   : TypeChamps:='FixedChar';
+    ftWideString  : begin TypeChamps:='CHAR'; CharVe:=True;end;
+    ftLargeint    : TypeChamps:='Largeint';
+    ftADT         : TypeChamps:='ADT';
+    ftArray       : TypeChamps:='Array';
+    ftReference   : TypeChamps:='Reference';
+    ftDataSet     : TypeChamps:='DataSet';
+    ftOraBlob     : TypeChamps:='OraBlob';
+    ftOraClob     : TypeChamps:='OraClob';
+    ftVariant     : TypeChamps:='Variant';
+    ftInterface   : TypeChamps:='Interface';
+    ftIDispatch   : TypeChamps:='IDispatch';
+    ftGuid        : TypeChamps:='Guid';
+    ftTimeStamp   : TypeChamps:='TimeStamp';
+    ftFMTBcd      : TypeChamps:='FMTBcd';
+  end;
+  Result:= TypeChamps;
+end;
+
+
+
+procedure TMoteur.InitMaitre2Detail(Chemin,ndf_Maitre1,chp_Maitre1,ndf_Maitre2,chp_Maitre2,
+                                    ndf_Detail,Chp_Detail1,Chp_Detail2:string);
+begin
+  Chem:=Chemin;
+  ndf_M1:=ndf_Maitre1;
+  chp_M1:=chp_Maitre1;
+  ndf_M2:=ndf_Maitre2;
+  chp_M2:=chp_Maitre2;
+  ndf_Det:=ndf_Detail;
+  Chp_Det1:=Chp_Detail1;
+  Chp_Det2:=Chp_Detail2;
+  DObjet.ChangeConnection(Chemin);
+  DObjet.Maitre1.TableName:=Ndf_Maitre1;
+  DObjet.Maitre2.TableName:=Ndf_Maitre2;
+  DObjet.QListDonnee.Close;
+  DObjet.QListDonnee.SQL.Clear;
+  DObjet.QListDonnee.SQL.Add('select * from '+ndf_Detail+
+               ' where ('+chp_Detail1+'=:a)'+' and ('+chp_Detail2+'=:b)');
+  DObjet.Maitre2.open;
+  DObjet.Maitre1.open;
+end;
+
+procedure TMoteur.InitSaisiList(Chemin,ndf_Maitre1,chp_Maitre1,ndf_Maitre2,chp_Maitre2,
+                                    ndf_Detail,Chp_Detail1,Chp_Detail2:string);
+begin
+  Chem:=Chemin;
+  ndf_M1:=ndf_Maitre1;
+  chp_M1:=chp_Maitre1;
+  ndf_M2:=ndf_Maitre2;
+  chp_M2:=chp_Maitre2;
+  ndf_Det:=ndf_Detail;
+  Chp_Det1:=Chp_Detail1;
+  Chp_Det2:=Chp_Detail2;
+  DObjet.ChangeConnection(Chemin);
+  DObjet.MaitreList.TableName:=Ndf_Maitre1;
+  DObjet.TableList.TableName:=Ndf_Maitre2;
+  DObjet.QListDonnee.Close;
+  DObjet.QListDonnee.SQL.Clear;
+  DObjet.QListDonnee.SQL.Add('select * from '+ndf_Detail+
+                ' where ('+chp_Detail1+'=:a)');
+  //DObjet.QListDonnee.Open;
+  DObjet.MaitreList.open;
+  DObjet.TableList.open;
+end;
+
+
+procedure TMoteur.S_Maitre1DataChange(Sender: TObject; Field: TField);
+var i:integer;
+begin
+  DObjet.QListDonnee.Close;
+  DObjet.QListDonnee.Parameters[0].Value:=DObjet.Maitre1.FieldByName(Chp_M1).Value;
+  if ndf_M2 <>'' then
+    DObjet.QListDonnee.Parameters[1].Value:=DObjet.Maitre2.FieldByName(Chp_M2).value;
+  DObjet.QListDonnee.Open;
+  if ndf_M2 ='' then
+    RechercheChamps(ndf_M1,DObjet.Maitre1.FieldByName(Chp_M1).Value,Chp_Det1,
+                    '','','')
+  else
+    RechercheChamps(ndf_M1,DObjet.Maitre1.FieldByName(Chp_M1).Value,Chp_Det1,
+                    ndf_M2,DObjet.Maitre2.FieldByName(Chp_M2).Value,Chp_Det2);
+end;
+
+procedure TMoteur.RechercheChamps(ndf_Maitre1,Valeur_Maitre1,chp_Detail1,
+                                  ndf_Maitre2,Valeur_Maitre2,chp_Detail2:string);
+var i,k,l:integer;
+begin
+  for k:=0 to DObjet.QListDonnee.Fields.Count-1 do
+    if DObjet.QListDonnee.Fields[k].FieldName = chp_Detail1 then break;
+
+  if ndf_Maitre2<>'' then
+  begin
+    for l:=0 to DObjet.QListDonnee.Fields.Count-1 do
+      if DObjet.QListDonnee.Fields[l].FieldName = chp_Detail2 then break;
+  end;
+
+  Entree[k+1].Ndf :=ndf_Maitre1;
+  Entree[k+1].Valeur :=Valeur_Maitre1;
+
+  if ndf_Maitre2<>'' then
+  begin
+    Entree[l+1].Ndf :=ndf_Maitre2;
+    Entree[l+1].Valeur :=Valeur_Maitre2;
+  end;
+end;
+
+procedure TMoteur.Choisir;
+begin
+  DObjet.Tempon.open;
+  DObjet.Tempon.first;
+  DObjet.Tempon.edit;
+  DObjet.TemponString1.Value:=DObjet.QListDonnee.fields[0].AsString;
+  DObjet.TemponString2.Value:=DObjet.QListDonnee.fields[1].AsString;
+  if DObjet.QListDonnee.fields.Count >2 then
+    DObjet.TemponString3.Value:=DObjet.QListDonnee.fields[2].AsString;
+  if DObjet.QListDonnee.fields.Count >3 then
+    DObjet.TemponString4.Value:=DObjet.QListDonnee.fields[3].AsString;
+  DObjet.Tempon.post;
+end;
+
+function TMoteur.CreationControle(Ndf:string;Panel:TPanel;Debut:integer;
+                          ListeCheck:TListeCheck;ListeLabel:TListeLabel;
+                          ListeEdit:TListeEdit):integer;
+var  i,lef,topy,pasvert,pashori,inithori,initvert,nb_Entree: Integer;
+begin
+  nb_Entree:=0;
+  inithori:=100;
+  initvert:=50;
+  lef:=inithori;
+  topy:=initvert;
+  pasvert:=25;     // TField
+  pashori:=275;
+  DObjet.QListDonnee.Close;
+  DObjet.QListDonnee.SQL.Clear;
+  DObjet.QListDonnee.SQL.Add('select * from '+ ndf+' ');
+  DObjet.QListDonnee.open;
+  for i:=debut to  DObjet.QListDonnee.fields.Count+debut do
+  begin
+    showMessage('Isa1:'+IntToStr(i));
+    case DObjet.QListDonnee.fields[i-1].DataType of
+      ftAutoInc:;
+      ftboolean:
+      begin
+        ListeCheck[i]:=TCheckBox.Create(self);
+        ListeCheck[i].parent:=Panel;//PageControl1.Pages[0];
+        ListeCheck[i].left:=lef-60;
+        ListeCheck[i].top:=topy;
+        ListeCheck[i].caption:=DObjet.QListDonnee.fields[i-1].FieldName;
+      end;
+      else
+      begin
+        ListeLabel[i]:=TLabel.Create(self);
+        ListeLabel[i].parent:=Panel;//PageControl1.Pages[0];
+        ListeLabel[i].AutoSize :=false;
+        ListeLabel[i].Width  :=150;
+        ListeLabel[i].Alignment:=taRightJustify;
+        ListeLabel[i].left:=0;
+        ListeLabel[i].top:=topy;
+        ListeLabel[i].caption:=DObjet.QListDonnee.fields[i-1].FieldName;
+        Listeedit[i]:=TEdit.Create(self);
+        Listeedit[i].parent:=Panel;//PageControl1.Pages[0];
+        Listeedit[i].left:=155;
+        Listeedit[i].top:=topy;
+        Listeedit[i].text:='';
+        Listeedit[i].width:=14*DObjet.QListDonnee.fields[i-1].DisplayWidth ;
+      end;
+    end;
+  end;
+  Panel.height:=pasvert*14;
+  Result:=DObjet.QListDonnee.fields.Count+debut;
+end;
+
+procedure TMoteur.S_MaitreListDataChange(Sender: TObject; Field: TField);
+begin
+  DObjet.QListDonnee.Close;
+  if DObjet.MaitreList.RecordCount >0 then
+    DObjet.QListDonnee.Parameters[0].Value:=DObjet.MaitreList.FieldByName(Chp_M1).Value
+  else
+    DObjet.QListDonnee.Parameters[0].Value:='0';
+  DObjet.QListDonnee.Open;
+end;
+
+end.

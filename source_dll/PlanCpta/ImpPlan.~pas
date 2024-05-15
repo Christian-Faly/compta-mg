@@ -1,0 +1,60 @@
+unit ImpPlan;
+
+interface
+
+uses Windows,Dialogs,menus;
+
+Type
+
+  TAsehoyCpt          = procedure(clss1,clss2,mode:shortint;initial,ip,chemin:string);
+
+  TAsehoyLstCpt       = procedure(Compte,ip,chemin:string;dix,afakamanova:boolean);
+  TAsehoyTypProd      = procedure(codeProd:string);
+  TAsehoyLieu         = procedure(mode:shortint);
+
+
+
+var
+  HPlanCpta           : THandle;
+
+  {Autre}
+  AsehoyLstCpt        : TAsehoyLstCpt;
+  AsehoyCpt           : TAsehoyCpt;
+  AsehoyTypProd       : TAsehoyTypProd;
+  AsehoyLieu          : TAsehoyLieu;
+  AfakaPlan           : boolean;
+
+function ChargerPlan:boolean;
+
+implementation
+
+function ChargerPlan:boolean;
+begin
+  Result:=false;
+
+  HPlanCpta := LoadLibrary('PlanCpta.dll');
+  if HPlanCpta = 0 then
+  begin
+    ShowMessage('Impossible de charger PlanCpta.dll');
+    exit;
+  end;
+
+  @AsehoyLstCpt:= GetProcAddress(HPlanCpta, 'AsehoyLstCpt');
+  if @AsehoyLstCpt = nil then ShowMessage('Impossible de charger AsehoyLstCpt de PlanCpta.dll');
+
+  @AsehoyCpt:= GetProcAddress(HPlanCpta, 'AsehoyCpt');
+  if @AsehoyCpt = nil then ShowMessage('Impossible de charger AsehoyCpt de PlanCpta.dll');
+
+  @AsehoyTypProd:= GetProcAddress(HPlanCpta, 'AsehoyTypProd');
+  if @AsehoyTypProd = nil then ShowMessage('Impossible de charger AsehoyTypProd de PlanCpta.dll');
+
+  @AsehoyLieu:= GetProcAddress(HPlanCpta, 'AsehoyLieu');
+  if @AsehoyLieu = nil then ShowMessage('Impossible de charger AsehoyLieu de PlanCpta.dll');
+
+  Result:=true;
+end;
+
+begin
+  afakaPlan:=true;
+
+end.

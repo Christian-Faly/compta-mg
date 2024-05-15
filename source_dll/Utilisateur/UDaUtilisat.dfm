@@ -1,0 +1,272 @@
+object DaUtilisat: TDaUtilisat
+  OldCreateOrder = False
+  Left = 184
+  Top = 105
+  Height = 290
+  Width = 636
+  object CUtilisat: TADOConnection
+    ConnectionString = 
+      'Provider=MSDASQL.1;Persist Security Info=False;Data Source=Utili' +
+      'sat;'
+    LoginPrompt = False
+    Provider = 'MSDASQL.1'
+    Left = 40
+    Top = 8
+  end
+  object tTEMPON: TADOTable
+    Connection = CUtilisat
+    CommandTimeout = 0
+    TableName = 'TEMPON'
+    Left = 136
+    Top = 8
+    object tTEMPONSTRING1: TWideStringField
+      FieldName = 'STRING1'
+      FixedChar = True
+    end
+    object tTEMPONSTRING2: TWideStringField
+      FieldName = 'STRING2'
+      FixedChar = True
+      Size = 100
+    end
+    object tTEMPONSTRING3: TWideStringField
+      FieldName = 'STRING3'
+      FixedChar = True
+      Size = 100
+    end
+    object tTEMPONREAL1: TFloatField
+      FieldName = 'REAL1'
+    end
+    object tTEMPONREAL2: TFloatField
+      FieldName = 'REAL2'
+    end
+    object tTEMPONDATE1: TDateTimeField
+      FieldName = 'DATE1'
+    end
+    object tTEMPONDATE2: TDateTimeField
+      FieldName = 'DATE2'
+    end
+    object tTEMPONSTRING4: TWideStringField
+      FieldName = 'STRING4'
+      FixedChar = True
+      Size = 100
+    end
+    object tTEMPONboolean1: TStringField
+      FieldName = 'boolean1'
+      FixedChar = True
+      Size = 1
+    end
+    object tTEMPONboolean2: TStringField
+      FieldName = 'boolean2'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object qAdministrateur: TADOQuery
+    Connection = CUtilisat
+    Parameters = <
+      item
+        Name = 'a'
+        DataType = ftString
+        Size = 1
+        Value = ' '
+      end
+      item
+        Name = 'b'
+        DataType = ftString
+        Size = 1
+        Value = ' '
+      end>
+    SQL.Strings = (
+      'select * from Acces'
+      'where (CodeUt=:a) and (Commande=:b)')
+    Left = 40
+    Top = 56
+  end
+  object ADOTable1: TADOTable
+    Connection = CUtilisat
+    CommandTimeout = 0
+    TableName = 'Acces'
+    Left = 240
+    Top = 8
+  end
+  object s_q_Acces: TDataSource
+    DataSet = q_Acces
+    Enabled = False
+    Left = 336
+    Top = 64
+  end
+  object q_Utilisat_Code: TADOQuery
+    Connection = CUtilisat
+    CursorType = ctStatic
+    CommandTimeout = 0
+    Parameters = <
+      item
+        Name = 'a'
+        DataType = ftString
+        Size = 1
+        Value = ' '
+      end>
+    SQL.Strings = (
+      'select * from Utilisat'
+      'where Code=:a')
+    Left = 136
+    Top = 56
+    object q_Utilisat_CodeCode: TWideStringField
+      FieldName = 'Code'
+    end
+    object q_Utilisat_CodeIdFonction: TIntegerField
+      FieldName = 'IdFonction'
+      Visible = False
+    end
+    object q_Utilisat_CodeFonction: TWideStringField
+      FieldKind = fkLookup
+      FieldName = 'Fonction'
+      LookupDataSet = t_Fonction
+      LookupKeyFields = 'Id'
+      LookupResultField = 'Description'
+      KeyFields = 'IdFonction'
+      FixedChar = True
+      Size = 30
+      Lookup = True
+    end
+  end
+  object t_Utilisat: TADOTable
+    Connection = CUtilisat
+    CursorType = ctStatic
+    CommandTimeout = 0
+    TableName = 'Utilisat'
+    Left = 408
+    Top = 8
+  end
+  object st_Utilisat: TDataSource
+    DataSet = t_Utilisat
+    Left = 416
+    Top = 64
+  end
+  object t_Fonction: TADOTable
+    Connection = CUtilisat
+    CursorType = ctStatic
+    CommandTimeout = 0
+    TableName = 'Fonction'
+    Left = 240
+    Top = 56
+    object t_FonctionId: TAutoIncField
+      FieldName = 'Id'
+      ReadOnly = True
+      Visible = False
+    end
+    object t_FonctionDescription: TWideStringField
+      FieldName = 'Description'
+      Size = 30
+    end
+  end
+  object st_Fonction: TDataSource
+    DataSet = t_Fonction
+    Left = 136
+    Top = 120
+  end
+  object q_Fonction_Id: TADOQuery
+    Connection = CUtilisat
+    CursorType = ctStatic
+    CommandTimeout = 0
+    Parameters = <
+      item
+        Name = 'a'
+        DataType = ftInteger
+        Size = -1
+        Value = Null
+      end>
+    SQL.Strings = (
+      'select Description from Fonction'
+      'where  Id=:a')
+    Left = 40
+    Top = 120
+    object q_Fonction_IdDescription: TWideStringField
+      FieldName = 'Description'
+      Size = 30
+    end
+  end
+  object q_Utilisateur_IdFonction: TADOQuery
+    Connection = CUtilisat
+    CursorType = ctStatic
+    CommandTimeout = 0
+    Parameters = <
+      item
+        Name = 'a'
+        DataType = ftString
+        Size = 1
+        Value = ' '
+      end>
+    SQL.Strings = (
+      'SELECT * '
+      'FROM Utilisat'
+      'WHERE IdFonction=:a ')
+    Left = 40
+    Top = 176
+  end
+  object q_Acces: TADOQuery
+    Connection = CUtilisat
+    CursorType = ctStatic
+    CommandTimeout = 0
+    Parameters = <
+      item
+        Name = 'a'
+        DataType = ftString
+        Size = 4
+        Value = 'GPAO'
+      end>
+    SQL.Strings = (
+      'select * from Acces'
+      'where Logiciel=:a'
+      'order by CodeUt, Commande')
+    Left = 336
+    Top = 8
+    object q_AccesCodeUt: TWideStringField
+      FieldName = 'CodeUt'
+    end
+    object q_AccesCommande: TWideStringField
+      FieldName = 'Commande'
+      Size = 255
+    end
+    object q_AccesIdFonction: TIntegerField
+      FieldName = 'IdFonction'
+    end
+    object q_Acceslogiciel: TWideStringField
+      FieldName = 'logiciel'
+      Size = 30
+    end
+    object q_Acceslectureseul: TIntegerField
+      FieldName = 'lectureseul'
+    end
+  end
+  object t_Acces: TADOTable
+    Connection = CUtilisat
+    CommandTimeout = 0
+    TableName = 'Acces'
+    Left = 240
+    Top = 120
+    object t_AccesCodeUt: TWideStringField
+      FieldName = 'CodeUt'
+    end
+    object t_AccesCommande: TWideStringField
+      FieldName = 'Commande'
+      Size = 255
+    end
+    object t_AccesLogiciel: TWideStringField
+      FieldName = 'Logiciel'
+      FixedChar = True
+      Size = 30
+    end
+    object t_AccesLectureSeul: TBooleanField
+      FieldName = 'LectureSeul'
+    end
+    object t_AccesIdFonction: TIntegerField
+      FieldName = 'IdFonction'
+    end
+  end
+  object st_Acces: TDataSource
+    DataSet = t_Acces
+    Left = 240
+    Top = 176
+  end
+end

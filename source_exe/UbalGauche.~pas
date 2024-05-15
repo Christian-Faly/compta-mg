@@ -1,0 +1,526 @@
+unit UbalGauche;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  quickrpt, Qrctrls, ExtCtrls, Grids, DBGrids, Db;
+
+type
+  TFBalGauche = class(TForm)
+    QuickRep1: TQuickRep;
+    QRBand7: TQRBand;
+    QRLabel51: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRLabel54: TQRLabel;
+    QRLabel55: TQRLabel;
+    QRGroup2: TQRGroup;
+    QRBand9: TQRBand;
+    QRGroup3: TQRGroup;
+    QRExpr69: TQRExpr;
+    QRBand10: TQRBand;
+    QRLabel62: TQRLabel;
+    QRExpr70: TQRExpr;
+    QRBand12: TQRBand;
+    QRGroup1: TQRGroup;
+    QRExpr1: TQRExpr;
+    QRGroup4: TQRGroup;
+    QRExpr2: TQRExpr;
+    QRLabel2: TQRLabel;
+    QRBand3: TQRBand;
+    QRLabel6: TQRLabel;
+    QRExpr44: TQRExpr;
+    QRShape20: TQRShape;
+    QRShape21: TQRShape;
+    QRShape22: TQRShape;
+    QRShape23: TQRShape;
+    QRShape24: TQRShape;
+    QRShape25: TQRShape;
+    QRShape26: TQRShape;
+    QRShape27: TQRShape;
+    QRBand11: TQRBand;
+    QRSysData3: TQRSysData;
+    QRExpr3: TQRExpr;
+    QRExpr4: TQRExpr;
+    QRExpr5: TQRExpr;
+    QRExpr6: TQRExpr;
+    QRExpr8: TQRExpr;
+    QRExpr9: TQRExpr;
+    QRExpr10: TQRExpr;
+    QRExpr11: TQRExpr;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRShape7: TQRShape;
+    QRShape8: TQRShape;
+    QRExpr13: TQRExpr;
+    QRExpr14: TQRExpr;
+    QRExpr15: TQRExpr;
+    QRExpr16: TQRExpr;
+    QRExpr18: TQRExpr;
+    QRExpr19: TQRExpr;
+    QRExpr20: TQRExpr;
+    QRExpr21: TQRExpr;
+    QRBand8: TQRBand;
+    QRShape50: TQRShape;
+    QRShape51: TQRShape;
+    QRShape52: TQRShape;
+    QRShape44: TQRShape;
+    QRShape45: TQRShape;
+    QRShape46: TQRShape;
+    QRShape49: TQRShape;
+    QRShape48: TQRShape;
+    QRShape43: TQRShape;
+    QRBand6: TQRBand;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel25: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRLabel28: TQRLabel;
+    QRShape33: TQRShape;
+    QRShape34: TQRShape;
+    QRShape35: TQRShape;
+    QRShape36: TQRShape;
+    QRShape37: TQRShape;
+    QRShape38: TQRShape;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel31: TQRLabel;
+    QRShape39: TQRShape;
+    QRShape40: TQRShape;
+    QRLabel45: TQRLabel;
+    QRLabel46: TQRLabel;
+    QRLabel47: TQRLabel;
+    QRShape41: TQRShape;
+    QRShape75: TQRShape;
+    QRShape76: TQRShape;
+    QRBand1: TQRBand;
+    QRLabel3: TQRLabel;
+    QRExpr46: TQRExpr;
+    QRShape30: TQRShape;
+    QRShape61: TQRShape;
+    QRShape62: TQRShape;
+    QRShape63: TQRShape;
+    QRShape64: TQRShape;
+    QRShape66: TQRShape;
+    QRShape67: TQRShape;
+    QRShape68: TQRShape;
+    QRExpr47: TQRExpr;
+    QRExpr48: TQRExpr;
+    QRExpr49: TQRExpr;
+    QRExpr50: TQRExpr;
+    QRExpr54: TQRExpr;
+    QRExpr55: TQRExpr;
+    QRExpr56: TQRExpr;
+    QRDBText13: TQRDBText;
+    QRShape42: TQRShape;
+    QRDBText7: TQRDBText;
+    QRGroup5: TQRGroup;
+    QRBand2: TQRBand;
+    QRExpr7: TQRExpr;
+    QRExpr53: TQRExpr;
+    QRExpr12: TQRExpr;
+    QRExpr17: TQRExpr;
+    QRExpr22: TQRExpr;
+    QRExpr27: TQRExpr;
+    QRExpr32: TQRExpr;
+    QRExpr37: TQRExpr;
+    QRExpr42: TQRExpr;
+    QRLabel4: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRLabel61: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRShape9: TQRShape;
+    QRExpr23: TQRExpr;
+    QRLabel58: TQRLabel;
+    QRExpr62: TQRExpr;
+    QRShape11: TQRShape;
+    QRShape12: TQRShape;
+    QRShape13: TQRShape;
+    QRShape14: TQRShape;
+    QRExpr24: TQRExpr;
+    QRExpr28: TQRExpr;
+    QRLabel57: TQRLabel;
+    QRExpr30: TQRExpr;
+    QRShape15: TQRShape;
+    QRShape16: TQRShape;
+    QRShape17: TQRShape;
+    QRShape18: TQRShape;
+    QRExpr25: TQRExpr;
+    QRExpr26: TQRExpr;
+    QRExpr31: TQRExpr;
+    QRExpr29: TQRExpr;
+    QRShape10: TQRShape;
+    QRLabel5: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRShape71: TQRShape;
+    QRShape72: TQRShape;
+    QRShape73: TQRShape;
+    QRExpr58: TQRExpr;
+    QRExpr61: TQRExpr;
+    QRShape78: TQRShape;
+    QRExpr60: TQRExpr;
+    QRShape80: TQRShape;
+    QRShape81: TQRShape;
+    QRShape74: TQRShape;
+    QRExpr59: TQRExpr;
+    QRExpr63: TQRExpr;
+    QRShape82: TQRShape;
+    QRExpr68: TQRExpr;
+    QRExpr65: TQRExpr;
+    QRExpr67: TQRExpr;
+    QRShape19: TQRShape;
+    QRLabel68: TQRLabel;
+    QRShape32: TQRShape;
+    QRShape47: TQRShape;
+    QRShape53: TQRShape;
+    QRExpr33: TQRExpr;
+    QRExpr34: TQRExpr;
+    QRExpr38: TQRExpr;
+    QRExpr39: TQRExpr;
+    QRLabel8: TQRLabel;
+    QRShape89: TQRShape;
+    QRExpr64: TQRExpr;
+    QRLabel9: TQRLabel;
+    QRExpr74: TQRExpr;
+    QRShape55: TQRShape;
+    QRShape56: TQRShape;
+    QRShape57: TQRShape;
+    QRShape58: TQRShape;
+    QRExpr35: TQRExpr;
+    QRExpr36: TQRExpr;
+    QRExpr40: TQRExpr;
+    QRExpr41: TQRExpr;
+    QRExpr72: TQRExpr;
+    QRExpr75: TQRExpr;
+    QRExpr77: TQRExpr;
+    QRExpr78: TQRExpr;
+    QRShape85: TQRShape;
+    QRShape28: TQRShape;
+    QRShape29: TQRShape;
+    QRExpr51: TQRExpr;
+    QRExpr73: TQRExpr;
+    procedure QRExpr2Print(sender: TObject; var Value: String);
+    procedure QRBand6AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRExpr62Print(sender: TObject; var Value: String);
+    procedure QRExpr44Print(sender: TObject; var Value: String);
+    procedure QRExpr70Print(sender: TObject; var Value: String);
+    procedure QRExpr46Print(sender: TObject; var Value: String);
+    procedure QRBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRGroup2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand3BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QuickRep1BeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+    procedure QRBand1AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand3AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand10AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand9AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand12AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRDBText7Print(sender: TObject; var Value: String);
+    procedure QRBand2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand10BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand9BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand8BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+  private
+    { Déclarations privées }
+    totdeb:array[0..7]of real;
+    totcred:array[0..7]of real;
+  public
+    { Déclarations publiques }
+  end;
+
+const
+  COMPT=0;
+  LONG3=1;
+  LONG2=2;
+  CLASSE=3;
+
+var
+  FBalGauche: TFBalGauche;
+
+implementation
+
+uses Daspecia, DaCommun, USQL, TypeElmt, UdaConsolide;
+
+{$R *.DFM}
+
+procedure TFBalGauche.QRExpr2Print(sender: TObject; var Value: String);
+begin
+  DASQL.SelNumCpt.close;
+  DASQL.SelNumCpt.Parameters[0].Value:=Value;
+  DASQL.SelNumCpt.open;
+  QRLabel2.Caption:=DASQL.SelNumCptIntitule.Value;
+end;
+
+
+procedure TFBalGauche.QRBand6AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  QRLabel1.Caption:='';
+end;
+
+procedure TFBalGauche.QRExpr62Print(sender: TObject; var Value: String);
+begin
+  DASQL.SelNumCpt.close;
+  DASQL.SelNumCpt.Parameters[0].Value:=Value;
+  DASQL.SelNumCpt.open;
+  QRLabel57.Caption:=DASQL.SelNumCptIntitule.Value;
+end;
+
+
+procedure TFBalGauche.QRExpr44Print(sender: TObject; var Value: String);
+begin
+  DASQL.SelNumCpt.close;
+  DASQL.SelNumCpt.Parameters[0].Value:=Value;
+  DASQL.SelNumCpt.open;
+  QRLabel1.Caption:=DASQL.SelNumCptIntitule.Value;
+end;
+
+procedure TFBalGauche.QRExpr70Print(sender: TObject; var Value: String);
+begin
+  DASQL.SelNumCpt.close;
+  DASQL.SelNumCpt.Parameters[0].Value:=Value;
+  DASQL.SelNumCpt.open;
+  QRLabel61.Caption:=DASQL.SelNumCptIntitule.Value;
+end;
+
+
+
+procedure TFBalGauche.QRExpr46Print(sender: TObject; var Value: String);
+begin
+  DASQL.SelNumCpt.close;
+  DASQL.SelNumCpt.Parameters[0].Value:=Value;
+  DASQL.SelNumCpt.open;
+  QRLabel4.Caption:=DASQL.SelNumCptIntitule.Value;
+end;
+
+procedure TFBalGauche.QRBand1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  DASQL.SelectParam('CONSOLID','TIT 4 POS');
+  if not DASQL.DansParam(DaConsolide.BalConsolide.Fields[0].Value) then
+  begin
+    QRBand1.Height:=0;
+    QRBand1.Frame.DrawTop:=false;
+    QRBand1.Frame.DrawBottom:=false;
+  end
+  else
+  begin
+    QRBand1.Height:=20;
+    QRBand1.Frame.DrawTop:=true;
+    QRBand1.Frame.DrawBottom:=true;
+  end;
+  TotDeb[5]:=0;
+  TotCred[5]:=0;
+end;
+
+procedure TFBalGauche.QRGroup2BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  if copy(DaConsolide.BalConsolide.Fields[0].Value,1,1)<>'6' then
+    QRGroup2.Height:=0
+  else
+  begin
+    QRGroup2.Height:=27;
+    QRExpr78.Reset;
+    QRExpr75.Reset;
+    QRExpr77.Reset;
+    QRExpr72.Reset;
+    QRExpr74.Reset;
+    QRExpr64.Reset;
+    QRExpr73.Reset;
+    QRExpr51.Reset;
+  end;
+end;
+
+procedure TFBalGauche.QRBand3BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  DASQL.SelectParam('CONSOLID','PAS 3 POS');
+  if not DASQL.DansParam(DaConsolide.BalConsolide.Fields[0].Value) then
+  begin
+    QRBand3.Height:=20;
+    QRBand3.Frame.DrawTop:=true;
+    QRBand3.Frame.DrawBottom:=true;
+  end
+  else
+  begin
+    QRBand3.Height:=0;
+    QRBand3.Frame.DrawTop:=false;
+    QRBand3.Frame.DrawBottom:=false;
+  end;
+  TotDeb[1]:=0;
+  TotCred[1]:=0;
+end;
+
+procedure TFBalGauche.QuickRep1BeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+var i:integer;
+begin
+  for i:=1 to 7 do
+  begin
+    totdeb[i]:=0;
+    totcred[i]:=0;
+  end;
+
+  QRGroup2.Height:=0;
+  QRGroup3.Height:=0;
+  QRGroup1.Height:=0;
+  QRGroup4.Height:=0;
+  QRGroup5.Height:=0;
+  QRBand2.Height :=0;
+
+  QRBand8.Height :=18;
+  QRBand1.Height :=20;
+  QRBand3.Height :=20;
+  QRBand10.Height:=20;
+  QRBand9.Height :=27;
+  QRBand12.Height:=46;
+
+  for i:=1 to 300 do QRLabel1.Caption:=QRLabel1.Caption+' ';
+  {Déterminer entete de titre}
+
+  //{1er sté}  DaConsolide.BalConsolideee.first; QRLabel28.Caption :=DaConsolide.BalConsolideeeNom.Value ;
+  //{2ème sté} DaConsolide.BalConsolideee.Next;  QRLabel24.Caption :=DaConsolide.BalConsolideeeNom.Value ;
+  //{3ème sté} DaConsolide.BalConsolideee.Next;  QRLabel30.Caption :=DaConsolide.BalConsolideeeNom.Value ;
+  //{4ème sté} DaConsolide.BalConsolideee.Next;  QRLabel46.Caption :=DaConsolide.BalConsolideeeNom.Value ;
+
+end;
+
+
+procedure TFBalGauche.QRBand1AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  QRExpr47.Reset;
+  QRExpr53.Reset;
+  QRExpr48.Reset;
+  QRExpr54.Reset;
+  QRExpr49.Reset;
+  QRExpr55.Reset;
+  QRExpr50.Reset;
+  QRExpr56.Reset;
+end;
+
+procedure TFBalGauche.QRBand3AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  QRExpr3.Reset;
+  QRExpr8.Reset;
+  QRExpr4.Reset;
+  QRExpr9.Reset;
+  QRExpr5.Reset;
+  QRExpr10.Reset;
+  QRExpr6.Reset;
+  QRExpr11.Reset;
+end;
+
+procedure TFBalGauche.QRBand10AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  QRExpr13.Reset;
+  QRExpr18.Reset;
+  QRExpr14.Reset;
+  QRExpr19.Reset;
+  QRExpr15.Reset;
+  QRExpr20.Reset;
+  QRExpr16.Reset;
+  QRExpr21.Reset;
+end;
+
+procedure TFBalGauche.QRBand9AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  QRExpr23.Reset;
+  QRExpr28.Reset;
+  QRExpr24.Reset;
+  QRExpr29.Reset;
+  QRExpr25.Reset;
+  QRExpr30.Reset;
+  QRExpr26.Reset;
+  QRExpr31.Reset;
+end;
+
+procedure TFBalGauche.QRBand12AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  QRExpr51.Reset;
+  QRExpr73.Reset;
+  QRExpr64.Reset;
+  QRExpr74.Reset;
+  QRExpr72.Reset;
+  QRExpr77.Reset;
+  QRExpr75.Reset;
+  QRExpr78.Reset;
+end;
+
+procedure TFBalGauche.QRDBText7Print(sender: TObject; var Value: String);
+begin
+  DASQL.SelNumCpt.close;
+  DASQL.SelNumCpt.Parameters[0].Value:=EnleveBlancDroite(Value);
+  DASQL.SelNumCpt.open;
+  QRLabel10.Caption:=DASQL.SelNumCptIntitule.Value;
+end;
+
+procedure TFBalGauche.QRBand2BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var i:integer;
+begin
+  for i:=1 to 7 do
+  begin
+//    totdeb[i]:=totdeb[i]+DaConsolide.BalConsolideStTotDeb.Value;
+//    totcred[i]:=totcred[i]+DaConsolide.BalConsolideStTotCred.Value;
+  end;
+end;
+
+procedure TFBalGauche.QRBand10BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  TotDeb[2]:=0;
+  TotCred[2]:=0;
+end;
+
+procedure TFBalGauche.QRBand9BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  TotDeb[3]:=0;
+  TotCred[3]:=0;
+end;
+
+procedure TFBalGauche.QRBand8BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  DaSQL.QTotConsilid_1.Close;
+  DaSQL.QTotConsilid_1.Parameters[0].Value := DaConsolide.BalConsolide.Fields[0].Value;
+  DaSQL.QTotConsilid_1.Open;
+
+  if (TotDeb[7]=0)and(TotCred[7]=0)and
+     (DaSQL.QTotConsilid_1TotDebit.Value=0)and
+     (DaSQL.QTotConsilid_1TotCredit.Value=0)then
+    QRBand8.Height := 0
+  else
+    QRBand8.Height :=18;
+  TotDeb[7]:=0;
+  TotCred[7]:=0;
+end;
+
+end.

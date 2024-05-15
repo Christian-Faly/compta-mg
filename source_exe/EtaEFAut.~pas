@@ -1,0 +1,1149 @@
+unit EtaEFAut;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Qrctrls, quickrpt, ExtCtrls, StdCtrls, Grids, DBGrids, Db;
+
+type
+  TFEtaEFAut = class(TForm)
+    QuickRep3: TQuickRep;
+    QRBand22: TQRBand;
+    QRDBText61: TQRDBText;
+    QRDBText62: TQRDBText;
+    QRBand17: TQRBand;
+    QRBand21: TQRBand;
+    QRBand25: TQRBand;
+    QRGroup11: TQRGroup;
+    QRGroup12: TQRGroup;
+    QRGroup13: TQRGroup;
+    QRGroup14: TQRGroup;
+    QRShape78: TQRShape;
+    QRShape82: TQRShape;
+    QRDBText69: TQRDBText;
+    QRBand26: TQRBand;
+    QRShape98: TQRShape;
+    QRShape102: TQRShape;
+    QRBand27: TQRBand;
+    QRShape110: TQRShape;
+    QRShape112: TQRShape;
+    QRBand29: TQRBand;
+    QRShape19: TQRShape;
+    QRShape87: TQRShape;
+    QRShape35: TQRShape;
+    QRExpr1: TQRExpr;
+    QRLabel39: TQRLabel;
+    QRLabel40: TQRLabel;
+    QRLabel41: TQRLabel;
+    QRBand1: TQRBand;
+    QRLabel10: TQRLabel;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    QRShape4: TQRShape;
+    QRShape16: TQRShape;
+    QRShape17: TQRShape;
+    QRShape18: TQRShape;
+    QRShape20: TQRShape;
+    QRShape25: TQRShape;
+    QRShape27: TQRShape;
+    QRShape28: TQRShape;
+    QRShape29: TQRShape;
+    QRShape31: TQRShape;
+    QRShape130: TQRShape;
+    QRShape128: TQRShape;
+    QRLabel18: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRShape5: TQRShape;
+    QRShape6: TQRShape;
+    QRLabel1: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRDBText12: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRDBText19: TQRDBText;
+    QRExpr2: TQRExpr;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel22: TQRLabel;
+    QRLabel23: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel25: TQRLabel;
+    QRLabel26: TQRLabel;
+    QRLabel27: TQRLabel;
+    QRShape9: TQRShape;
+    QRLabel31: TQRLabel;
+    QRLabel33: TQRLabel;
+    QRLabel32: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRShape7: TQRShape;
+    QRLabel2: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRShape30: TQRShape;
+    QRLabel11: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel16: TQRLabel;
+    QRShape10: TQRShape;
+    QRShape15: TQRShape;
+    QRLabel13: TQRLabel;
+    QRLabel29: TQRLabel;
+    QRShape8: TQRShape;
+    QRLabel15: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel38: TQRLabel;
+    QRShape11: TQRShape;
+    QRExpr4: TQRExpr;
+    QRLabel28: TQRLabel;
+    QRExpr37: TQRExpr;
+    QRLabel34: TQRLabel;
+    QRLabel35: TQRLabel;
+    QRLabel36: TQRLabel;
+    QRLabel37: TQRLabel;
+    QRLabel42: TQRLabel;
+    procedure QRBand21BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRGroup14BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRExpr1Print(sender: TObject; var Value: String);
+    procedure QRExpr54Print(sender: TObject; var Value: String);
+    procedure QRExpr5Print(sender: TObject; var Value: String);
+    procedure QRExpr47Print(sender: TObject; var Value: String);
+    procedure QRExpr24Print(sender: TObject; var Value: String);
+    procedure QRExpr63Print(sender: TObject; var Value: String);
+    procedure QRExpr13Print(sender: TObject; var Value: String);
+    procedure QRExpr53Print(sender: TObject; var Value: String);
+    procedure QRExpr43Print(sender: TObject; var Value: String);
+    procedure QRExpr33Print(sender: TObject; var Value: String);
+    procedure QRExpr23Print(sender: TObject; var Value: String);
+    procedure QRExpr58Print(sender: TObject; var Value: String);
+    procedure QRExpr65Print(sender: TObject; var Value: String);
+    procedure QRExpr64Print(sender: TObject; var Value: String);
+    procedure QRExpr15Print(sender: TObject; var Value: String);
+    procedure QRExpr25Print(sender: TObject; var Value: String);
+    procedure QRExpr34Print(sender: TObject; var Value: String);
+    procedure QRExpr35Print(sender: TObject; var Value: String);
+    procedure QRExpr44Print(sender: TObject; var Value: String);
+    procedure QRExpr45Print(sender: TObject; var Value: String);
+    procedure QRExpr55Print(sender: TObject; var Value: String);
+    procedure QRExpr6Print(sender: TObject; var Value: String);
+    procedure QRExpr48Print(sender: TObject; var Value: String);
+    procedure QRExpr38Print(sender: TObject; var Value: String);
+    procedure QRExpr28Print(sender: TObject; var Value: String);
+    procedure QRExpr18Print(sender: TObject; var Value: String);
+    procedure QRExpr26Print(sender: TObject; var Value: String);
+    procedure QRExpr4Print(sender: TObject; var Value: String);
+    procedure QRExpr59Print(sender: TObject; var Value: String);
+    procedure QRExpr7Print(sender: TObject; var Value: String);
+    procedure QRExpr49Print(sender: TObject; var Value: String);
+    procedure QRExpr39Print(sender: TObject; var Value: String);
+    procedure QRExpr29Print(sender: TObject; var Value: String);
+    procedure QRExpr19Print(sender: TObject; var Value: String);
+    procedure QRExpr36Print(sender: TObject; var Value: String);
+    procedure QRExpr10Print(sender: TObject; var Value: String);
+    procedure QRExpr60Print(sender: TObject; var Value: String);
+    procedure QRExpr8Print(sender: TObject; var Value: String);
+    procedure QRExpr50Print(sender: TObject; var Value: String);
+    procedure QRExpr40Print(sender: TObject; var Value: String);
+    procedure QRExpr30Print(sender: TObject; var Value: String);
+    procedure QRExpr20Print(sender: TObject; var Value: String);
+    procedure QRExpr46Print(sender: TObject; var Value: String);
+    procedure QRExpr12Print(sender: TObject; var Value: String);
+    procedure QRExpr61Print(sender: TObject; var Value: String);
+    procedure QRExpr9Print(sender: TObject; var Value: String);
+    procedure QRExpr51Print(sender: TObject; var Value: String);
+    procedure QRExpr41Print(sender: TObject; var Value: String);
+    procedure QRExpr31Print(sender: TObject; var Value: String);
+    procedure QRExpr21Print(sender: TObject; var Value: String);
+    procedure QRExpr56Print(sender: TObject; var Value: String);
+    procedure QRExpr14Print(sender: TObject; var Value: String);
+    procedure QRExpr62Print(sender: TObject; var Value: String);
+    procedure QRExpr11Print(sender: TObject; var Value: String);
+    procedure QRExpr52Print(sender: TObject; var Value: String);
+    procedure QRExpr42Print(sender: TObject; var Value: String);
+    procedure QRExpr32Print(sender: TObject; var Value: String);
+    procedure QRExpr22Print(sender: TObject; var Value: String);
+    procedure QRExpr57Print(sender: TObject; var Value: String);
+    procedure QRBand1AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRGroup12BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRGroup13BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand27BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand26BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRGroup11BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand25BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand29BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand27AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand26AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand25AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand29AfterPrint(Sender: TQRCustomBand;
+      BandPrinted: Boolean);
+    procedure QRBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QuickRep3BeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+    procedure QRBand22BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRExpr37Print(sender: TObject; var Value: String);
+    procedure QRLabel4Print(sender: TObject; var Value: String);
+    procedure QRLabel5Print(sender: TObject; var Value: String);
+    procedure QRLabel6Print(sender: TObject; var Value: String);
+    procedure QRLabel7Print(sender: TObject; var Value: String);
+  private
+    { Déclarations privées }
+    Total:real;
+    TotGene_1,Tot_1,Tot1_1,Tot2_1,Tot3_1:real;
+    BrutGene, Brut,Brut1,Brut2,Brut3, Final_1,BrutN :double;
+    first   :boolean;    //
+    vide:string;
+    ndfOrig,ndfPrec,ndfDest,CmptRes:string;
+    calcul:boolean;
+    typ,modeC:integer;
+    TypSoc,N_Soc, page:integer;
+    //mt:real;
+    procedure AffectationValeur(var Value:string;var br:double);
+  public
+    { Déclarations publiques }
+    det:boolean;
+    procedure Imprimer(TypS,Typa,Num,Pg:integer;expr_,expr,
+       ndfOrigine,ndfPrecedent,ndfDestination,CmptResult:string;detail:boolean;modeCalc:shortint);
+  end;
+
+var
+  FEtaEFAut: TFEtaEFAut;
+
+procedure ImprimerEFAutre(TypS,Typa,Num,pg:integer;expr_,expr,
+    ndfOrigine,ndfPrecedent,ndfDestination,CmptResult:string;detail:boolean;modeCalc:shortint);
+
+implementation
+
+uses DaCommun, Daspecia,  TypeElmt, USQL;
+
+{$R *.DFM}
+
+procedure ImprimerEFAutre(TypS,Typa,Num,pg:integer;expr_,expr,
+     ndfOrigine,ndfPrecedent,ndfDestination,CmptResult:string;detail:boolean;modeCalc:shortint);
+begin
+  try
+    FEtaEFAut:=TFEtaEFAut.create(Application);
+    FEtaEFAut.Imprimer(TypS,Typa,Num,pg,expr_,expr,ndfOrigine,ndfPrecedent,ndfDestination,CmptResult,detail,modeCalc);
+  finally
+    FEtaEFAut.Free;
+  end;
+end;
+
+procedure TFEtaEFAut.Imprimer(TypS,Typa,Num,pg:integer;expr_,expr,
+   ndfOrigine,ndfPrecedent,ndfDestination,CmptResult:string;detail:boolean;modeCalc:shortint);
+begin
+  N_Soc:=Num;
+  typ:=typa;
+  det:=detail;
+  TypSoc:=TypS;
+  page:=pg;
+  case typa of
+    1:{Bilan passif};
+    2:{Resultat Charge };
+    3:{Resultat Produit};
+  end;
+  ndfOrig:=ndfOrigine;
+  ndfPrec:=ndfPrecedent;
+  ndfDest:=ndfDestination;
+  CmptRes:=CmptResult;
+  modeC:= modeCalc ;  //
+  QRExpr4.Expression := Expr_;
+  QRExpr37.Expression := Expr;
+  //SplashForm.Timer1.enabled:=false;
+  QuickRep3.Preview;
+end;
+
+procedure TFEtaEFAut.QRBand21BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var mt:real;
+begin
+  mt:=0;
+  Case N_Soc of
+    0:mt := DASQL.ParamEFMontant1.Value+DASQL.ParamEFMontant2.Value+
+            DASQL.ParamEFMontant3.Value+DASQL.ParamEFMontant4.Value+
+            DASQL.ParamEFMontant5.Value+DASQL.ParamEFMontant6.Value+
+            DASQL.ParamEFMontant7.Value;
+    1:mt := DASQL.ParamEFMontant1.Value;
+    2:mt := DASQL.ParamEFMontant2.Value;
+    3:mt := DASQL.ParamEFMontant3.Value;
+    4:mt := DASQL.ParamEFMontant4.Value;
+    5:mt := DASQL.ParamEFMontant5.Value;
+    6:mt := DASQL.ParamEFMontant6.Value;
+    7:mt := DASQL.ParamEFMontant7.Value;
+  end;
+  Total:=Total+mt;
+  QRLabel28.Caption:=FormatFloat('0',total);
+end;
+
+procedure TFEtaEFAut.QRGroup14BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var st:string;
+begin
+  DASQL.SelUnionCp.close;
+  DASQL.SelUnionCp.parameters[0].Value:=DASQL.ParamEFNumero_3.Value;
+  DASQL.SelUnionCp.Open;
+  st:=DASQL.SelUnionCpIntitule.value;
+  QRLabel39.Caption := st;
+  QRLabel40.Caption := st;
+  if not DASQL.ParamEFEF_3.Value then
+  begin
+    QRBand27.Height :=1;
+  end
+  else
+  begin
+    QRBand27.Height :=18;
+  end;
+end;
+
+procedure TFEtaEFAut.QRExpr1Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRExpr54Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRExpr5Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRExpr47Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.AffectationValeur(var Value:string;var br:double);
+begin
+  avadihoReal(Value,Br);
+  if (DASQL.ParamEFCompteD.Value =CmptRes)and   // Numero de compte resultat
+     (N_Soc>0)and                               // Agence
+     (Typ>1)then                                // Compte de resultat(Charge ou produit)
+  begin
+    if Typ=2 then // Debit(Charge)
+      Case N_Soc of
+        1:Br := DASQL.ParamEFDebit1.Value;
+        2:Br := DASQL.ParamEFDebit2.Value;
+        3:Br := DASQL.ParamEFDebit3.Value;
+        4:Br := DASQL.ParamEFDebit4.Value;
+        5:Br := DASQL.ParamEFDebit5.Value;
+        6:Br := DASQL.ParamEFDebit6.Value;
+        7:Br := 0//DASQL.ParamEFDebit7.Value;
+      end;
+    if Typ=3 then // Credit(Produit)
+      Case N_Soc of
+        1:Br := DASQL.ParamEFCredit1.Value;
+        2:Br := DASQL.ParamEFCredit2.Value;
+        3:Br := DASQL.ParamEFCredit3.Value;
+        4:Br := DASQL.ParamEFCredit4.Value;
+        5:Br := DASQL.ParamEFCredit5.Value;
+        6:Br := DASQL.ParamEFCredit6.Value;
+        7:Br := 0;//DASQL.ParamEFCredit7.Value;
+      end;
+    Value:=FormatFloat('#,##0',Br);
+  end;
+
+  if (DASQL.ParamEFNumero_2.Value = 150)and(not calcul)or
+     (DASQL.ParamEFNumero_1.Value = 139) then
+  begin
+    first:=false;
+    Br:=-Br;
+    value:=FormatFloat('#,##0',Br);
+  end;// else
+
+  Value:=Parenthese(Value,true);
+
+  if (typ=2)and (DASQL.ParamEFTypSomme.Value=0) then
+  begin
+    Value:=FormatFloat('#,##0;(#,##0)',Final_1);
+    brutN:= br;
+    br:=Final_1;
+  end;
+  Brut2:=Brut2+Br;
+end;
+
+
+procedure TFEtaEFAut.QRExpr24Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr63Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr13Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr53Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr43Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr33Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr23Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr58Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr65Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr64Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr15Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr25Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr34Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr35Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRExpr44Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr45Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr55Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr6Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr48Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr38Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr28Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr18Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr26Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr4Print(sender: TObject; var Value: String);
+begin
+  if not DASQL.ParamEFdeciderGroupe.Value then
+  begin
+    AffectationValeur(Value,brut3);
+  end;
+  Value:='';
+end;
+
+procedure TFEtaEFAut.QRExpr59Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr7Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr49Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr39Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr29Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr19Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr36Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr10Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr60Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr8Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr50Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr40Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr30Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr20Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr46Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr12Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr61Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr9Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr51Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr41Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr31Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr21Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr56Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr14Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr62Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr11Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr52Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr42Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr32Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr22Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRExpr57Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+
+end;
+
+procedure TFEtaEFAut.QRBand1AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  QRBand17.Frame.DrawTop :=false;
+  if typ=1 then
+  begin
+    if calcul then
+    begin
+      DASQL.SelConsolid.Close;
+      DASQL.SelConsolid.Parameters[0].Value:=CmptRes;
+      DASQL.SelConsolid.Open;
+      DASQL.SelConsolid.Edit;
+      DASQL.SelConsolidCompteD.Value:=CmptRes;
+      DASQL.SelConsolidCredit1.Value:=BrutGene+DASQL.SelConsolidDebit1.Value;
+      DASQL.SelConsolid.Post;
+    end;
+  end;
+  TotGene_1:=0;
+  BrutGene:=0;
+end;
+
+procedure TFEtaEFAut.QRGroup12BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QRLabel10.Caption :='';//
+  if (not DASQL.ParamEFEF_1.Value) then
+  begin
+    QRGroup12.Height :=0;
+    QRBand25.Height :=0;
+  end
+  else
+  begin
+    QRGroup12.Height :=18;
+    QRBand25.Height :=25;
+    //QRLabel10.Caption :=vide;//
+  end;
+
+{  QRLabel10.Caption :='';
+  if (not DASQL.ParamEFEF_2.Value) and (not DASQL.ParamEFEF_3.Value) then
+  begin
+    QRGroup12.Height :=0;
+  end
+  else
+  begin
+    QRGroup12.Height :=18;
+    QRLabel10.Caption :=vide;
+  end;}
+end;
+
+procedure TFEtaEFAut.QRGroup13BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var h:integer;
+begin
+
+  if (not DASQL.ParamEFEF_2.Value) then
+  begin
+    QRGroup13.Height :=0;
+    QRBand26.Height :=0;
+  end
+  else
+  begin
+    QRGroup13.Height :=18;
+    QRBand26.Height :=18;
+  end;
+
+  if (not DASQL.ParamEFEF_3.Value) then
+  begin
+    QRGroup13.Height :=0;
+  end;
+
+  h:=QRGroup13.Height;
+
+  if DASQL.ParamEFIntitule_2.Value='Situation nette (avant résultat de l''exercice)' then
+  begin
+    QRGroup13.Height:=1;
+    QRLabel29.Caption:='';
+  end
+  else
+  begin
+    QRLabel29.Caption:= DASQL.ParamEFIntitule_2.Value;
+    QRGroup13.Height:=h;
+  end;
+{  if  DASQL.ParamEFIntitule_2.Value='DOTATIONS AUX PROVISIONS' then
+  begin
+    //QRLabel29.Left:= 11;
+    QRDBText68.Size.Width:=0;
+  end
+  else
+  begin
+    QRLabel29.Left:= 30;
+    QRDBText68.Size.Width:=172;
+  end}
+end;
+
+procedure TFEtaEFAut.QRBand27BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  if not DASQL.ParamEFEF_3.value then QRBand27.Height :=1;
+  DASQL.BilanAct_1.Close;
+  DASQL.BilanAct_1.Parameters[0].Value:=DASQL.ParamEFNumero_3.Value;
+  DASQL.BilanAct_1.Open;
+  QRLabel18.Caption:=FormatFloat('#,##0;(#,##0)',DASQL.BilanAct_1Brut.value);
+  Tot2_1:=Tot2_1+DASQL.BilanAct_1Brut.value;
+  if (typ=2)and(DASQL.ParamEFTypSomme.Value = 0) then
+  Final_1:=DASQL.BilanAct_1AmPro.Value;
+end;
+
+procedure TFEtaEFAut.QRBand26BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  if DASQL.ParamEFIntitule_2.Value<>'DOTATIONS AUX PROVISIONS' then
+    QRLabel38.Caption := DASQL.ParamEFIntitule_2.Value
+  else
+    QRLabel38.Caption := '';
+
+  if DASQL.ParamEFIntitule_2.Value <> 'DOTATIONS AUX AMORTISSEMENTS' then
+    QRLabel38.Left := 42
+  else
+    QRLabel38.Left := 11;
+
+  if not DASQL.ParamEFEF_2.value then QRBand26.Height :=0;
+  if DASQL.ParamEFIntitule_2.Value='Situation nette (avant résultat de l''exercice)' then
+  begin
+    QRLabel38.Font.Style := [fsBold];
+    QRShape8.Width  := 234;
+    QRShape11.Width := 234;
+  end
+  else
+  begin
+    QRLabel38.Font.Style := [];
+    QRShape8.Width:=0;
+    QRShape11.Width:=0;
+  end;
+
+  if DASQL.ParamEFIntitule_2.Value<>'' then
+  begin
+    QRLabel19.Caption := FormatFloat('#,##0;(#,##0)',Tot2_1);
+    QRLabel4.Caption := FormatFloat('#,##0;(#,##0)',Brut2);
+  end
+  else
+  begin
+    QRLabel19.Caption := '';
+    QRLabel4.Caption := '';
+  end;
+  Brut1:=Brut1+Brut2;
+  Tot1_1:=Tot1_1+Tot2_1;
+end;
+
+procedure TFEtaEFAut.QRGroup11BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+
+  if (not DASQL.ParamEFEF_1.Value) and(not DASQL.ParamEFEF_2.Value) and (not DASQL.ParamEFEF_3.Value) then
+  begin
+    QRGroup11.Height :=0;
+    QRLabel13.caption:=DASQL.ParamEFIntitule.Value;
+  end
+  else
+  begin
+    QRGroup11.Height :=18;
+    if DASQL.ParamEFIntitule.Value<>'' then
+      QRLabel13.caption:='Total ' +DASQL.ParamEFIntitule.Value;
+    if DASQL.ParamEFIntitule.Value='CAPITAUX PROPRES' then
+      QRLabel13.caption:='';
+  end;
+end;
+
+procedure TFEtaEFAut.QRBand25BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  if DASQL.ParamEFIntitule_1.Value<>'' then
+  begin
+    QRLabel20.Caption := FormatFloat('#,##0;(#,##0)',Tot1_1);
+    QRLabel5.Caption := FormatFloat('#,##0;(#,##0)',Brut1);
+  end
+  else
+  begin
+    QRBand25.Height:=1;
+    //QRLabel20.Caption := FormatFloat('#,##0;(#,##0)',Tot1_1);
+    //QRLabel5.Caption := FormatFloat('#,##0;(#,##0)',Brut1);
+  end;
+  Brut:=Brut+Brut1;
+  Tot_1:=Tot_1+Tot1_1;
+end;
+
+procedure TFEtaEFAut.QRBand29BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QRLabel21.Caption := FormatFloat('#,##0;(#,##0)',Tot_1);
+  QRLabel6.Caption  := FormatFloat('#,##0;(#,##0)',Brut);
+  BrutGene:=BrutGene+Brut;
+  TotGene_1 := TotGene_1 + Tot_1;
+end;
+
+procedure TFEtaEFAut.QRBand27AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  Special.BilanAct.Insert;
+  Special.BilanActNumero_3.value:=DASQL.ParamEFNumero_3.Value ;
+  Special.BilanActNumero_2.value:=DASQL.ParamEFNumero_2.Value ;
+  Special.BilanActNumero_1.value:=DASQL.ParamEFNumero_1.Value ;
+  Special.BilanActNumero.value:=DASQL.ParamEFNumero.Value ;
+  Special.BilanActLibelle.Value := QRLabel40.Caption ;
+  if (typ=2) and (DASQL.ParamEFTypSomme.Value=0) then
+  begin
+      Special.BilanActBrut.Value := Final_1;
+      Special.BilanActAmPro.Value := BrutN;{Valeur Final N}
+  end
+  else
+  begin
+    Special.BilanActBrut.Value := Brut3;
+  end;
+  Special.BilanAct.Post;
+end;
+
+procedure TFEtaEFAut.QRBand26AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  Tot2_1:=0;
+  Brut2:=0;
+end;
+
+procedure TFEtaEFAut.QRBand25AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  Tot1_1:=0;
+  Brut1:=0;
+end;
+
+procedure TFEtaEFAut.QRBand29AfterPrint(Sender: TQRCustomBand;
+  BandPrinted: Boolean);
+begin
+  Tot_1:=0;
+  Brut:=0;
+end;
+
+procedure TFEtaEFAut.QRBand1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QRLabel1.Caption := FormatFloat('#,##0;(#,##0)',TotGene_1);
+  QRLabel7.Caption := FormatFloat('#,##0;(#,##0)',BrutGene);
+end;
+
+procedure TFEtaEFAut.QuickRep3BeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+var valeur:longint;
+   EF_1:string;
+begin
+  if det then  QRBand21.Height:=61
+  else QRBand21.Height:=0;
+  QRLabel32.Caption:='- '+FormatFloat('#',page)+' -';
+  first:=true;
+  TotGene_1:=0;
+  Tot_1:=0;
+  Tot1_1:=0;
+  Tot2_1:=0;
+  Tot3_1:=0;
+  Brut2:=0;
+  Special.BilanAct.close;
+  case typ of
+    1:{Bilan passif}
+    begin
+      QRLabel11.Caption := 'PASSIF';
+      Special.BilanAct.TableName :='BilanPas';
+      //QRLabel3.Caption := 'TOTAL PASSIF';
+    end;
+    2:{Resultat Charge }
+    begin
+      QRLabel11.Caption := 'DEBIT';
+      Special.BilanAct.TableName :='ResulCha';
+      //QRLabel3.Caption := 'TOTAL GENERAL';
+    end;
+    3:{Resultat Produit}
+    begin
+      QRLabel11.Caption := 'CREDIT';
+      Special.BilanAct.TableName :='ResulPro';
+      //QRLabel3.Caption := 'TOTAL GENERAL';
+    end;
+  end;
+
+  Special.BilanAct.Open;Special.BilanAct.first;
+  while not Special.BilanAct.EOF do  Special.BilanAct.delete;
+
+  calcul:=false;
+  if typ=1 then
+  begin
+    valeur:=-1;
+    if modeC=1 then
+    begin
+      if MessageDlg('Voulez-vous recalculer le resultat?',MtConfirmation,[mbYes,mbNo],0)=mrYes then
+      begin
+        calcul:=true;
+        valeur:=0;
+      end;
+    end;
+    if valeur >=0 then
+    begin
+      DASQL.SelConsolid.Close;
+      DASQL.SelConsolid.SQL.Clear;
+      DASQL.SelConsolid.SQL.Add('Select * from ');
+      DASQL.SelConsolid.SQL.Add(' consolidee ');
+      DASQL.SelConsolid.SQL.Add('where compteD=:a');
+      DASQL.SelConsolid.Close;
+      DASQL.SelConsolid.Parameters[0].Value:=CmptRes;
+      DASQL.SelConsolid.Open;
+
+      DASQL.SelConsolid.Edit;
+      DASQL.SelConsolidCompteD.Value:=CmptRes;
+      DASQL.SelConsolidCredit1.Value:=valeur;
+      DASQL.SelConsolid.Post;
+
+    end;
+  end;
+  DASQL.Am_Prov.close;
+  DASQL.Am_Prov.SQL.Clear;
+  DASQL.Am_Prov.SQL.Add('Select * from  ');
+  DASQL.Am_Prov.SQL.Add(' consolidee ');
+  DASQL.Am_Prov.SQL.Add('where (CompteD>=:x) and (CompteD<=:y)');
+
+  vide:='                                                       ';
+  QRLabel2.Caption := 'Période du '+ FormatDateTime('dd/MM/yyyy',commun.SocieteExerDeb.Value)
+                    + ' au '+ FormatDateTime('dd/MM/yyyy',commun.SocieteExerFin.Value);
+  Total:=0;
+  QRLabel41.Caption :=vide;
+
+
+  DASQL.ParamEF.Close;
+  DASQL.ParamEF.SQL.Clear;
+  DASQL.ParamEF.SQL.Add('Select * from  Titre a, SousTitr b, ');
+  DASQL.ParamEF.SQL.Add('SouSouTi c, UnionCp d, GroupCpt e,');
+  DASQL.ParamEF.SQL.Add('consolidee f');
+  DASQL.ParamEF.SQL.Add('where (a.EF or b.EF or c.EF or d.EF)and');
+  DASQL.ParamEF.SQL.Add(' (a.Typa=:z)and');
+  DASQL.ParamEF.SQL.Add(' (a.Numero=b.Titre)and(b.Numero=c.SouTitre) and');
+  DASQL.ParamEF.SQL.Add('(c.Numero=d.SSTitre) and (d.Numero=e.UnionCp)and');
+  DASQL.ParamEF.SQL.Add('(f.CompteD>=e.DebutCpt)and(f.CompteD<=e.FinCompte+''Z'')');
+  DASQL.ParamEF.SQL.Add('order by a.typa, a.rang, a.numero, b.rang, b.Numero, c.rang,');
+  DASQL.ParamEF.SQL.Add('c.Numero, d.rang, d.Numero, e.rang, e.IntitGroup, e.DebutCpt, f.compteD');
+  DASQL.ParamEF.Parameters[0].Value:=typ;
+  DASQL.ParamEF.open;
+  QRGroup14.Height :=0;
+  case typ of
+    1:EF_1:='BilanPas_1';
+    2:EF_1:='ResulCha_1';
+    3:EF_1:='ResulPro_1';
+  end;
+  try
+    DASQL.BilanAct_1.Close;
+    DASQL.BilanAct_1.SQL.clear;
+    DASQL.BilanAct_1.SQL.Add('select * from '+EF_1);
+    DASQL.BilanAct_1.SQL.Add('where numero_3=:a');
+    DASQL.BilanAct_1.Parameters[0].Value:=0;
+    DASQL.BilanAct_1.Open;
+  except
+    On EDataBaseError do
+      //DASQL.BilanAct_1.DatabaseName:='c:\CSC\Log\Exec\Compta\Data';
+  end;
+end;
+
+procedure TFEtaEFAut.QRBand22BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+var ste,CodeExerN, CodeExerN_1:string;
+begin
+  ste:='';
+  Case typSoc  of
+  0:begin
+      Commun.Consolide.First;
+      while not Commun.Consolide.EOF do
+      begin
+        Ste:=Ste+' - '+Commun.ConsolideRS.Value;
+        Commun.Consolide.Next;
+      end;
+      QRLabel30.Caption:=Ste;
+      if typ<2 then
+        QRLabel33.Caption:= 'BILAN CONSOLIDE AU '+FormatDateTime('dd/mm/yyyy', Commun.SocieteExerFin.Value)
+      else
+        QRLabel33.Caption:= 'COMPTE DE RESULTAT CONSOLIDE AU '+FormatDateTime('dd/mm/yyyy', Commun.SocieteExerFin.Value);
+    end;
+  1:begin
+      QRLabel30.Caption:=Commun.ConsolideRS.Value;
+      if typ<2 then
+        QRLabel33.Caption:= 'BILAN AU '+FormatDateTime('dd/mm/yyyy', Commun.SocieteExerFin.Value)
+      else
+        QRLabel33.Caption:= 'COMPTE DE RESULTAT AU '+FormatDateTime('dd/mm/yyyy', Commun.SocieteExerFin.Value);
+    end;
+  end;
+  Commun.CodeExercice(Commun.SocieteCode.Value,CodeExerN,CodeExerN_1 );
+  QRLabel15.Caption := CodeExerN ;
+  QRLabel17.Caption := CodeExerN_1 ;
+end;
+
+procedure TFEtaEFAut.QRExpr37Print(sender: TObject; var Value: String);
+begin
+  if DASQL.ParamEFdeciderGroupe.Value then
+    AffectationValeur(Value,brut3)
+  else
+    Value:=FormatFloat('#,##0',Brut3);
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRLabel4Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRLabel5Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRLabel6Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+procedure TFEtaEFAut.QRLabel7Print(sender: TObject; var Value: String);
+begin
+  Value:=Parenthese(Value,true);
+end;
+
+end.

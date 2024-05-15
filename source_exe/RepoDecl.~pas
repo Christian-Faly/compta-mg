@@ -1,0 +1,263 @@
+unit RepoDecl;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Db, DBTables, Grids, DBGrids, DBCtrls, Buttons, StdCtrls, ExtCtrls;
+
+type
+  TFRepoDecl = class(TForm)
+    Panel2: TPanel;
+    ScrollBox: TScrollBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    DBNavigator: TDBNavigator;
+    DBGrid1: TDBGrid;
+    SourceDecl: TDataSource;
+    BitBtn1: TBitBtn;
+    Label5: TLabel;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    SpeedButton6: TSpeedButton;
+    Label4: TLabel;
+    Label6: TLabel;
+    Edit5: TEdit;
+    SpeedButton7: TSpeedButton;
+    Label7: TLabel;
+    Label8: TLabel;
+    Edit6: TEdit;
+    procedure SourceDeclDataChange(Sender: TObject; Field: TField);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure Edit2Change(Sender: TObject);
+  private
+    { Déclarations privées }
+    nochange:boolean;
+    typa:shortInt;
+    procedure Fafao;
+    procedure Raiso(ajout:boolean);
+  public
+    { Déclarations publiques }
+    procedure Asehoy(typ:shortint);
+  end;
+
+var
+  FRepoDecl: TFRepoDecl;
+
+implementation
+
+uses Daspecia, DaCommun,  TypeElmt, ImpPlan, USQL;
+
+{$R *.DFM}
+
+procedure TFRepoDecl.Asehoy(typ:shortint);
+begin
+  NoChange:=false;
+  Label3.Visible:=false;
+  Edit2.Visible:=false;
+  Label4.Caption:='';
+  Label7.Caption:='';
+  typA:=typ;
+  case typ of
+    0:begin{Vente}
+        Edit2.Text:='';
+        Edit2.Visible:=false;
+        Label3.Caption:='';
+        Caption:='Ventes :';
+      end;
+    1:begin{Achat}
+        Edit2.Visible:=true;
+        Label3.Visible:=true;
+        Label3.Caption:='Code prod.';
+        Caption:='Achats :';
+      end;
+    2:begin{Prestation}
+        Edit2.Visible:=true;
+        Label3.Visible:=true;
+        Label3.Caption:='Code prest.';
+        Caption:='Prestation :';
+      end;
+  end;
+  //Caption:=caption+Special.decl.DatabaseName+'/'+Special.decl.TableName;
+  SourceDecl.DataSet:=Special.decl;
+  ShowModal;
+end;
+
+procedure  TFRepoDecl.Fafao;
+begin
+  edit1.text:='';
+  edit2.text:='';
+  edit3.text:='';
+  edit4.text:='';
+  edit5.text:='';
+  edit6.text:='';
+  try
+    Edit1.Setfocus;
+  except on
+    EOutOfResources do
+    else ;
+  end;
+end;
+
+procedure TFRepoDecl.Raiso(ajout:boolean);
+var mt,tax,qte:double;
+begin
+  if not AvadihoReal(edit3.text,mt)then
+  begin
+    MessageDlg('Mettez un nombre réél',mterror,[mbok],0);
+    exit;
+  end;
+  if not AvadihoReal(edit4.text,tax)then
+  begin
+    MessageDlg('Mettez un nombre réél',mterror,[mbok],0);
+    exit;
+  end;
+  if not AvadihoReal(edit5.text,qte)then
+  begin
+    MessageDlg('Mettez un nombre réél',mterror,[mbok],0);
+    exit;
+  end;
+  NoChange:=true;
+  if ajout then Special.decl.insert else Special.decl.Edit;
+  try
+    Special.declCompte.Value:=edit1.text;
+    //Special.declProduit.Value:=edit2.text;
+    Special.declObservatio.Value:=edit6.text;
+    Special.declMontHT.Value:=mt;
+    Special.declTaxe.Value:=tax;
+    Special.declQte.Value:=Qte;
+    Special.decl.post;
+  except
+    on EDataBaseError do
+    begin
+      Application.MessageBox('Ce compte et produit sont déjà enregistrés','Erreur de saisie',mb_ok);
+      Special.decl.cancel;
+    end
+  end;
+  NoChange:=False;
+end;
+
+procedure TFRepoDecl.SourceDeclDataChange(Sender: TObject; Field: TField);
+begin
+  if nochange then exit;
+  edit1.text:=Special.declCompte.Value;
+  //edit2.text:=Special.declProduit.Value;
+  edit3.text:=FormatFloat('0.##',Special.declMontHT.Value);
+  edit4.text:=FormatFloat('0.##',Special.declTaxe.Value);
+  edit5.text:=FormatFloat('0.##',Special.declQte.Value);
+  edit6.text:=Special.declObservatio.Value;
+end;
+
+procedure TFRepoDecl.SpeedButton1Click(Sender: TObject);
+begin
+  Fafao;
+end;
+
+procedure TFRepoDecl.SpeedButton2Click(Sender: TObject);
+begin
+  Raiso(true);
+end;
+
+procedure TFRepoDecl.SpeedButton3Click(Sender: TObject);
+begin
+  Raiso(false);
+end;
+
+procedure TFRepoDecl.SpeedButton4Click(Sender: TObject);
+begin
+  if Application.MessageBox('Voulez-vous vraiement le supprimmer',
+         'Confirmation', mb_YesNo)=IDYES then
+    try
+      Special.Decl.delete;
+      Special.Decl.post;
+      Special.Decl.requery;
+    except
+      on EDataBaseError do
+    end;
+end;
+
+procedure TFRepoDecl.SpeedButton6Click(Sender: TObject);
+var st:string[2];
+k:string;
+begin
+  case typA of
+    0:st:='41';
+    1:st:='40';
+    2:st:='40';
+  end;
+  AsehoyLstCpt(st,Special.param_serverip.Value,Commun.SocieteChemin.Value ,true,true);
+  Commun.Tempon.requery;
+  if length(Commun.TemponString1.Value)>0 then
+    edit1.text:=Commun.TemponString1.Value;
+end;
+
+procedure TFRepoDecl.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  SourceDecl.DataSet:=Special.Repos;
+end;
+
+procedure TFRepoDecl.BitBtn1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TFRepoDecl.Edit1Change(Sender: TObject);
+begin
+  if length(EDIT1.text)<8 then exit;
+  DASQL.SelNumAdres.Close;
+  DASQL.SelNumAdres.Parameters[0].Value:=EDIT1.text;
+  DASQL.SelNumAdres.open;
+  if DASQL.SelNumAdres.EOF then Label4.Caption:=''{ ShowMessage('Le compte n''existe pas ou' +
+                    'l''information n''est pas complet non complet dans le plan')}
+  else Label4.Caption:=DASQL.SelNumAdresNom.Value;
+end;
+
+procedure TFRepoDecl.SpeedButton7Click(Sender: TObject);
+begin
+  if typa=2 then
+  begin
+    AsehoyTypProd('PR');
+    Commun.Tempon.requery;
+    label7.caption:=Commun.TemponString1.Value;
+  end;
+end;
+
+procedure TFRepoDecl.Edit2Change(Sender: TObject);
+begin
+  if length(Edit2.text)=0 then exit;
+  if typa<2 then
+  begin
+    DASQL.SelNumDivers2.close;
+    DASQL.SelNumDivers2.parameters[0].Value:=Edit2.text;
+    DASQL.SelNumDivers2.open;
+    {if DASQL.SelNumDivers2.EOF then ShowMessage('Code produit non trouvé')
+    else} label7.Caption:=DASQL.SelNumDivers2NatureProd.Value;
+  end
+  else
+  begin
+    DASQL.Sel2TypProd.close;
+    DASQL.Sel2TypProd.parameters[0].Value:=Edit2.text;
+    DASQL.Sel2TypProd.open;
+    if DASQL.Sel2TypProd.EOF then label7.Caption:='Code prest non trouvé'
+    else label7.Caption:=DASQL.Sel2TypProdFamille.Value;
+  end
+end;
+
+end.

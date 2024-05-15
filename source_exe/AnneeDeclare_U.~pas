@@ -1,0 +1,196 @@
+unit AnneeDeclare_U;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, StdCtrls, ExtCtrls, DB, Buttons;
+
+type
+  TFAnneeDeclare = class(TForm)
+    DBGrid1: TDBGrid;
+    DataSource1: TDataSource;
+    DBGrid2: TDBGrid;
+    DataSource2: TDataSource;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    BitBtn1: TBitBtn;
+    Memo1: TMemo;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+    function Importer(Table,Annee,champ_join1,champ_join2,champ_join3:string):boolean;
+    procedure Asehoy(Annee:string);
+    procedure AffichageNormale;
+  public
+    { Public declarations }
+  end;
+
+var
+  FAnneeDeclare: TFAnneeDeclare;
+
+procedure AsehoyAnneeDeclare(Annee:string);
+
+implementation
+
+uses DaCommun, UPStocke, Daspecia;
+
+{$R *.dfm}
+
+procedure AsehoyAnneeDeclare(Annee:string);
+begin
+  try
+    FAnneeDeclare := TFAnneeDeclare.Create(Application);
+    FAnneeDeclare.Asehoy(Annee);
+  finally
+    FAnneeDeclare.Free;
+  end
+end;
+
+procedure TFAnneeDeclare.Asehoy(Annee:string);
+var a:integer;
+  first :boolean;
+  annee1, annee2,critere : string;
+  tafita:boolean;
+begin
+  tafita:= false;
+  Label2.Caption := Annee;
+  a :=  strToInt(copy(Annee,3,2));
+  annee1 := FormatFloat('00',a-1)+copy(Annee,3,2);
+  annee2 := copy(Annee,3,2)+FormatFloat('00',a+1);
+  Commun.q_exercice_declare.Close;
+  Commun.q_exercice_declare.Parameters[0].Value := annee1;
+  Commun.q_exercice_declare.Parameters[1].Value := annee1;
+  Commun.q_exercice_declare.Parameters[2].Value := annee2;
+  Commun.q_exercice_declare.Open;
+  if Importer('journal',Annee,'code','tiers','') then
+  begin
+    showMessage('1:journal');
+    if Importer('eltjrn',Annee,'journal','compte','') then
+    begin
+      showMessage('2:eltjrn');
+      if Importer('numcpt',Annee,'numcpt','','') then
+      begin
+        showMessage('3:numcpt');
+        if Importer('numadres',Annee,'numcpt','','') then
+        begin
+          showMessage('4:numadres');
+          if Importer('numdiver',Annee,'numcpt','','') then
+            tafita := true;
+        end;
+      end;
+    end;
+  end;
+  if not tafita then
+  begin
+    height := 468;
+    width := 872;
+  end;
+
+  showModal;
+end;
+
+function TFAnneeDeclare.Importer(Table,Annee,champ_join1,champ_join2,champ_join3:string):boolean;
+var first:boolean;
+  critere,len : string;
+  nb,i:integer;
+  erreur : boolean;
+begin
+  erreur := false;
+  PStockee.Operation2.Close;
+  PStockee.Operation2.SQL.Clear;
+  PStockee.Operation2.SQL.Add('SELECT column_name, data_type,character_maximum_length');
+  PStockee.Operation2.SQL.Add('FROM information_schema.columns');
+  PStockee.Operation2.SQL.Add('WHERE table_name='''+table+'''');
+  PStockee.Operation2.Open;
+
+  PStockee.Operation1.Close;
+  PStockee.Operation1.SQL.Clear;
+  PStockee.Operation1.SQL.Add('DROP TABLE IF EXISTS '+table+'_'+annee);
+  PStockee.Operation1.ExecSQL;
+
+  PStockee.Operation1.Close;
+  PStockee.Operation1.SQL.Clear;
+  PStockee.Operation1.SQL.Add('CREATE TABLE '+table+'_'+annee+' AS');
+  first := true;
+  Commun.q_exercice_declare.first;
+  while not Commun.q_exercice_declare.Eof do
+  begin
+    if not first then
+      PStockee.Operation1.SQL.Add('UNION');
+    first := false;
+    critere := '"left"(periode,4)='''''+Annee+'''''';
+    PStockee.Operation1.SQL.Add('SELECT '''+Commun.q_exercice_declarechemin.Value+''' AS bdd,');
+    if champ_join1>'' then
+      PStockee.Operation1.SQL.Add(''''+Commun.q_exercice_declarechemin.Value+'-''||t.'+champ_join1+' AS '+champ_join1+'_,');
+    if champ_join2>'' then
+      PStockee.Operation1.SQL.Add(''''+Commun.q_exercice_declarechemin.Value+'-''||t.'+champ_join2+' AS '+champ_join2+'_,');
+    if champ_join3>'' then
+      PStockee.Operation1.SQL.Add(''''+Commun.q_exercice_declarechemin.Value+'-''||t.'+champ_join3+' AS '+champ_join3+'_,');
+    PStockee.Operation1.SQL.Add('* FROM dblink(''dbname='+Commun.q_exercice_declarechemin.Value+' host='+Special.param_serverip.Value +' port=5432 user = postgres password=vony'',');
+    if Table='journal' then
+      PStockee.Operation1.SQL.Add(''' SELECT * FROM journal WHERE '+critere+ ''' )')
+    else if Table='eltjrn' then
+      PStockee.Operation1.SQL.Add(''' SELECT eltjrn.* FROM journal JOIN eltjrn ON code=journal WHERE '+critere+''')')
+    else
+      PStockee.Operation1.SQL.Add(''' SELECT * FROM '+Table+ ''' )');
+    PStockee.Operation1.SQL.Add('AS t(');
+    PStockee.Operation2.First;
+    nb:= PStockee.Operation2.RecordCount;
+    i:=0;
+
+    while not PStockee.Operation2.eof do
+    begin
+      i:=i+1;
+      if PStockee.Operation2.FieldValues['character_maximum_length']>0 then
+        len:='('+IntToStr(PStockee.Operation2.FieldValues['character_maximum_length'])+')'
+      else
+        len:='';
+      if i=nb then
+        PStockee.Operation1.SQL.Add(PStockee.Operation2.FieldValues['column_name']+' '+ PStockee.Operation2.FieldValues['data_type']+len)
+      else
+        PStockee.Operation1.SQL.Add(PStockee.Operation2.FieldValues['column_name']+' '+ PStockee.Operation2.FieldValues['data_type']+len+',');
+      PStockee.Operation2.next;
+    end;
+    PStockee.Operation1.SQL.Add(')');
+    Commun.q_exercice_declare.Next;
+  end;
+   showMessage('5');
+ try
+    Memo1.Lines := PStockee.Operation1.SQL;
+    PStockee.Operation1.ExecSQL;
+  except
+    On E:Exception do
+    begin
+      Memo1.Visible := true;
+      erreur := true;
+      showMessage(E.Message);
+    end;
+  end;
+  result := not erreur;
+end;
+
+procedure TFAnneeDeclare.BitBtn1Click(Sender: TObject);
+begin
+  Close
+end;
+
+procedure TFAnneeDeclare.FormShow(Sender: TObject);
+begin
+  AffichageNormale
+end;
+
+procedure TFAnneeDeclare.AffichageNormale;
+begin
+  height:=90;
+  width := 535;
+  autoscroll := false;
+  DBGrid2.Align := AlNone;
+  DBGrid2.Top  := 56;
+  DBGrid1.Align := AlNone;
+  DBGrid1.Top  := 56;;
+end;
+
+end.

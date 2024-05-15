@@ -1,0 +1,127 @@
+unit Saisitxt;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Buttons, StdCtrls, ExtCtrls;
+
+type
+  TFSaisieTxt = class(TForm)
+    Edit1: TEdit;
+    Label1: TLabel;
+    BitBtn2: TBitBtn;
+    SpeedButton2: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    RadioGroup1: TRadioGroup;
+    procedure BitBtn2Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
+  private
+    { Déclarations privées }
+    VerifierPlan:boolean;
+  public
+    { Déclarations publiques }
+    procedure Asehoy(Titre,prompt,init:string;veriplan,texte,radio:boolean);
+  end;
+
+var
+  FSaisieTxt: TFSaisieTxt;
+
+procedure AsehoySaisiTxt(Titre,prompt,init:string;veriplan,texte,Radio:boolean);export;
+
+implementation
+
+uses  TypeElmt, DaCommun , USQL;
+
+{$R *.DFM}
+
+
+procedure AsehoySaisiTxt;
+begin
+  try
+    FSaisieTxt:=TFSaisieTxt.Create(Application);
+    FSaisieTxt.Asehoy(Titre,prompt,init,veriplan,texte,radio);
+  finally
+    FSaisieTxt.free;
+  end;
+end;
+
+procedure TFSaisieTxt.Asehoy(Titre,prompt,init:string;veriplan,texte,radio:boolean);
+begin
+  DASQL.NumCompte.close;
+  DASQL.NumCompte.SQL.Clear;
+  DASQL.NumCompte.SQL.Add('Select * from NumCpt ');
+  DASQL.NumCompte.SQL.Add('where NumCpt=:a ');
+  Caption:=titre;
+  Label1.caption:=prompt;
+  edit1.text:=init;
+  verifierplan:=veriplan;
+  if verifierplan then SpeedButton1.visible:=true
+  else SpeedButton1.visible:=false;
+  if not texte then
+  begin
+    Edit1.Visible:=false;
+    SpeedButton1.Visible:=false;
+  end;
+  if not Radio then RadioGroup1.Visible:=false;
+  ShowModal;
+end;
+
+procedure TFSaisieTxt.BitBtn2Click(Sender: TObject);
+begin
+  Commun.Tempon.open;
+  Commun.Tempon.first;
+  Commun.Tempon.edit;
+  Commun.TemponString2.Value:=edit1.text;
+  Commun.TemponBoolean1.Value:=1;
+  Commun.Tempon.post;
+  close;
+end;
+
+procedure TFSaisieTxt.SpeedButton2Click(Sender: TObject);
+begin
+  Commun.Tempon.open;
+  Commun.Tempon.first;
+  Commun.Tempon.edit;
+  Commun.TemponBoolean1.Value:=0;
+  Commun.Tempon.post;
+  close;
+end;
+
+procedure TFSaisieTxt.SpeedButton1Click(Sender: TObject);
+begin
+  {AsehoyLstCpt(edit1.text,true);
+  edit1.text:=DataCpte.NumCompteNumCpt.Value;}
+end;
+
+procedure TFSaisieTxt.Edit1Change(Sender: TObject);
+begin
+  try
+    if (length(edit1.text)>7) and VerifierPlan then
+    begin
+      DASQL.NumCompte.close;
+      DASQL.NumCompte.parameters[0].Value:=edit1.text;
+      DASQL.NumCompte.open;
+      if DASQL.NumCompte.eof then
+      begin
+       if MessageDlg('Ce numero de compte n''existe pas Voulez vous le créer',
+         mtConfirmation,[mbyes,mbno],0)=mryes then
+           {AsehoyCpt1(clss1,clss1,0,edit1.text);}
+      end;
+    end;
+  except
+    On EConvertError do;
+  end;
+end;
+
+procedure TFSaisieTxt.RadioGroup1Click(Sender: TObject);
+var item:integer;
+begin
+  Item:=RadioGroup1.ItemIndex;
+  edit1.text:= RadioGroup1.Items[Item] ;
+end;
+
+end.

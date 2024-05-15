@@ -1,0 +1,210 @@
+object FListDonnee3: TFListDonnee3
+  Left = 53
+  Top = 64
+  Width = 648
+  Height = 411
+  Caption = 'FListDonnee3'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 125
+    Top = 0
+    Width = 515
+    Height = 337
+    Align = alClient
+    DataSource = Moteur.S_QListeDonnee
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    OnKeyUp = DBGrid1KeyUp
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 337
+    Width = 640
+    Height = 40
+    Align = alBottom
+    TabOrder = 1
+    object SpeedButton4: TSpeedButton
+      Left = 131
+      Top = 8
+      Width = 73
+      Height = 25
+      Caption = 'Ajouter'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333333FF33333333FF333993333333300033377F3333333777333993333333
+        300033F77FFF3333377739999993333333333777777F3333333F399999933333
+        33003777777333333377333993333333330033377F3333333377333993333333
+        3333333773333333333F333333333333330033333333F33333773333333C3333
+        330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+        333333333337733333FF3333333C333330003333333733333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton1Click
+    end
+    object SpeedButton5: TSpeedButton
+      Left = 209
+      Top = 8
+      Width = 76
+      Height = 25
+      Caption = 'Modifier'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+        555555555555555555555555555555555555555555FF55555555555559055555
+        55555555577FF5555555555599905555555555557777F5555555555599905555
+        555555557777FF5555555559999905555555555777777F555555559999990555
+        5555557777777FF5555557990599905555555777757777F55555790555599055
+        55557775555777FF5555555555599905555555555557777F5555555555559905
+        555555555555777FF5555555555559905555555555555777FF55555555555579
+        05555555555555777FF5555555555557905555555555555777FF555555555555
+        5990555555555555577755555555555555555555555555555555}
+      NumGlyphs = 2
+      OnClick = SpeedButton5Click
+    end
+    object SpeedButton6: TSpeedButton
+      Left = 290
+      Top = 8
+      Width = 76
+      Height = 25
+      Caption = 'Supprimer'
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333FF33333333333330003333333333333777333333333333
+        300033FFFFFF3333377739999993333333333777777F3333333F399999933333
+        3300377777733333337733333333333333003333333333333377333333333333
+        3333333333333333333F333333333333330033333F33333333773333C3333333
+        330033337F3333333377333CC3333333333333F77FFFFFFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC399333777777777737733333CC3333333
+        333333377F33333333FF3333C333333330003333733333333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton6Click
+    end
+    object BitBtn2: TBitBtn
+      Left = 369
+      Top = 8
+      Width = 82
+      Height = 25
+      Caption = '&Choisir'
+      TabOrder = 0
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333333333333333333FFF333333333333000333333333
+        3333777FFF3FFFFF33330B000300000333337F777F777773F333000E00BFBFB0
+        3333777F773333F7F333000E0BFBF0003333777F7F3337773F33000E0FBFBFBF
+        0333777F7F3333FF7FFF000E0BFBF0000003777F7F3337777773000E0FBFBFBF
+        BFB0777F7F33FFFFFFF7000E0BF000000003777F7FF777777773000000BFB033
+        33337777773FF733333333333300033333333333337773333333333333333333
+        3333333333333333333333333333333333333333333333333333333333333333
+        3333333333333333333333333333333333333333333333333333}
+      NumGlyphs = 2
+    end
+    object BitBtn1: TBitBtn
+      Left = 32
+      Top = 8
+      Width = 75
+      Height = 25
+      TabOrder = 1
+      OnClick = BitBtn1Click
+      Kind = bkHelp
+    end
+    object BitBtn3: TBitBtn
+      Left = 455
+      Top = 8
+      Width = 75
+      Height = 25
+      TabOrder = 2
+      Kind = bkClose
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Top = 0
+    Width = 125
+    Height = 337
+    Align = alLeft
+    Caption = 'Panel4'
+    Color = 14221220
+    TabOrder = 2
+    Visible = False
+    object Label19: TLabel
+      Left = 1
+      Top = 40
+      Width = 123
+      Height = 52
+      Align = alTop
+      Caption = 
+        'Pour modifier  '#233'l'#233'ment, Selectionner l'#39#233'l'#233'ment concern'#233' et Cliqu' +
+        'ez sur le bouton Modifier'
+      WordWrap = True
+    end
+    object Label42: TLabel
+      Left = 1
+      Top = 92
+      Width = 123
+      Height = 67
+      Align = alTop
+      AutoSize = False
+      Caption = 
+        'Si l'#39#233'l'#233'ment n'#39'est null part utilis'#233', vous pouvez le supprimer '#224 +
+        ' l'#39'aide du bouton supprimer'
+      WordWrap = True
+    end
+    object Label43: TLabel
+      Left = 1
+      Top = 159
+      Width = 123
+      Height = 39
+      Align = alTop
+      Caption = 'Pour sortir cette boite de dialogue choisir le bouton Fermer'
+      WordWrap = True
+    end
+    object Label3: TLabel
+      Left = 1
+      Top = 198
+      Width = 123
+      Height = 42
+      Align = alTop
+      AutoSize = False
+      Caption = 'Pour fermer l'#39'aide en ligne cliquer sur aide'
+      WordWrap = True
+    end
+    object Label1: TLabel
+      Left = 1
+      Top = 1
+      Width = 123
+      Height = 39
+      Align = alTop
+      Caption = 
+        'Pour enregistrer un nouveau '#233'l'#233'ment, Cliquez sur le bouton Ajout' +
+        'er'
+      WordWrap = True
+    end
+  end
+end
