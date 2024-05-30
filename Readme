@@ -1,5 +1,17 @@
 
 ======== ASHM : Accounting Software Homemade ==========
+Existing accounting software is not compatible with Malagasy taxation.
+One company  Madagascar decides to manufacture in-house tailor-made
+software for its activity, is flexible and configurable, compatible
+with the requirements of the General Directorate of Taxes of Madagascar
+which change all the time and without the permanent assistance of developers.
+
+The software created makes it possible to
+-	Create documents (a database) which are exercises by agency
+-	Enter accounting entries with on-the-fly lettering; control button automatic lettering based on invoice number, manual lettering assistant
+-	Take out newspapers, general ledger, balance, VAT and much more
+-	Other types of declarations that may be adjusted or configured according to the requirements of the tax department in Madagascar
+
 
 To use the accounting software compatible with Malagasy taxation:
 1 - download the binpg folder
